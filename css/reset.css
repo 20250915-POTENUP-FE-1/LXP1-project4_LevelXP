@@ -1,0 +1,232 @@
+@charset "utf-8";
+* {-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;}
+:after, :before {-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;}
+
+:root {
+   /* color */
+   --color-primary: #0078ff;
+   --color-secondary: #be4298;
+   --color-dark: #242424;
+   /* --color-gradient:  linear-gradient(90deg, rgba(98,64,153,1) 0%, rgba(190,66,152,1) 100%); */
+
+  /* height  */
+   --header-height : clamp(3.75rem, 2.5rem + 3.125vw, 6.25rem);
+   --lnb-height : clamp(45px, calc( 70 / var(--inner) * 100vw ), 70px ); 
+
+   /* space  */
+   --container-space : clamp(16px, calc( 30 / var(--inner) * 100vw ), 30px );   
+
+   --space-200 : clamp(100px, calc( 200 / var(--inner) * 100vw ), 200px );   
+   --space-180 : clamp(90px, calc( 180 / var(--inner) * 100vw ), 180px );   
+   --space-160 : clamp(80px, calc( 160 / var(--inner) * 100vw ), 160px );   
+   --space-150 : clamp(75px, calc( 150 / var(--inner) * 100vw ), 150px );    
+   --space-140 : clamp(70px, calc( 140 / var(--inner) * 100vw ), 140px );    
+   --space-120 : clamp(60px, calc( 120 / var(--inner) * 100vw ), 120px );    
+   --space-100 : clamp(50px, calc( 100 / var(--inner) * 100vw ), 100px );   
+   --space-90 : clamp(45px, calc( 90 / var(--inner) * 100vw ), 90px );
+   --space-80 : clamp(40px, calc( 80 / var(--inner) * 100vw ), 80px );
+   --space-70 : clamp(35px, calc( 70 / var(--inner) * 100vw ), 70px );
+   --space-60 : clamp(30px, calc( 60 / var(--inner) * 100vw ), 60px );
+   --space-50 : clamp(25px, calc( 50 / var(--inner) * 100vw ), 50px );
+   --space-40 : clamp(20px, calc( 40 / var(--inner) * 100vw ), 40px );
+   --space-30 : clamp(15px, calc( 30 / var(--inner) * 100vw ), 30px );
+   --space-25 : clamp(12px, calc( 25 / var(--inner) * 100vw ), 25px );
+   --space-20 : clamp(10px, calc( 20 / var(--inner) * 100vw ), 20px );
+   --space-16 : clamp(8px, calc( 16 / var(--inner) * 100vw ), 16px );
+   --space-15 : clamp(7px, calc( 15 / var(--inner) * 100vw ), 15px );
+   --space-10 : clamp(5px, calc( 10 / var(--inner) * 100vw ), 10px );
+
+   /* font style */
+   --font-sans-serif: 'Pretendard', sans-serif;
+   --inner: 1600;
+
+   --12px : 0.75rem;
+   --13px : 0.813rem;
+   --14px : 0.875rem;
+   --15px : 0.938rem;
+   --16px : 1rem;
+   --17px : 1.063rem;
+   --18px : 1.125rem;
+   --20px : 1.25rem;
+   --22px : 1.375rem;
+   --24px : 1.5rem;
+   --34px : 2.125rem;
+   --40px : 2.5rem;
+
+   --font-a :  clamp(13px, calc( 18 / var(--inner) * 100vw ), 18px );
+ 
+   --font-size-12 : clamp(10px, calc( 12 / var(--inner) * 100vw ), 12px);
+   --font-size-13 : clamp(11px, calc( 13 / var(--inner) * 100vw ), 13px);
+   --font-size-14 : clamp(12px, calc( 14 / var(--inner) * 100vw ), 14px);
+   --font-size-15 : clamp(13px, calc( 15 / var(--inner) * 100vw ), 15px);
+   --font-size-16 : clamp(14px, calc( 16 / var(--inner) * 100vw ), 16px);
+   --font-size-17 : clamp(15px, calc( 17 / var(--inner) * 100vw ), 17px);
+   --font-size-18 : clamp(16px, calc( 18 / var(--inner) * 100vw ), 18px);
+   --font-size-19 : clamp(17px, calc( 19 / var(--inner) * 100vw ), 19px);
+   --font-size-20 : clamp(18px, calc( 20 / var(--inner) * 100vw ), 20px);
+   --font-size-22 : clamp(19px, calc( 22 / var(--inner) * 100vw ), 22px);
+   --font-size-24 : clamp(20px, calc( 24 / var(--inner) * 100vw ), 24px);
+   --font-size-32 : clamp(22px, calc( 32 / var(--inner) * 100vw ), 32px);
+   --font-size-40 : clamp(24px, calc( 40 / var(--inner) * 100vw ), 40px);
+   --font-size-48 : clamp(28px, calc( 48 / var(--inner) * 100vw ), 48px);
+   --font-size-56 : clamp(30px, calc( 56 / var(--inner) * 100vw ), 56px);
+   --font-size-64 : clamp(32px, calc( 64 / var(--inner) * 100vw ), 64px);
+   --font-size-72 : clamp(36px, calc( 72 / var(--inner) * 100vw ), 72px);
+
+   --line-height-lg: 1.75;
+   --line-height-md: 1.5;
+   --line-height-sm: 1.33; 
+
+   /* body */
+   --body-font-family: var(--font-sans-serif);
+   --body-font-size: clamp(0.875rem, 0.8125rem + 0.1563vw, 1rem);
+   --body-font-weight: 400;
+   --body-line-height: 1.75em;  
+   --body-letter-spacing: -0.03em;
+   --body-color: #505050;
+
+   /* radius */
+   --border-radius-32:  clamp(16px, calc( 32 / var(--inner) * 100vw ), 32px);
+   --border-radius-24:  clamp(12px, calc( 24 / var(--inner) * 100vw ), 24px);
+   --border-radius-16:  clamp(8px, calc( 16 / var(--inner) * 100vw ), 16px);
+
+   /* shadow */
+   --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+   --box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+   --box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+   --box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+
+   --transition-custom: all 0.4s ease-in-out;
+   --transition-custom2: all 0.8s ease-in-ou;
+}
+
+/* reset */
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,figure,figcaption{margin:0;padding:0}
+body,input,textarea,select,button,table{font-family:var(--body-font-family); font-size:var(--body-font-size); line-height:var(--body-line-height);  color:var(--body-color); letter-spacing: var(--body-letter-spacing); word-break:keep-all;-webkit-text-size-adjust:none;}
+img{border:0;max-width:100%;vertical-align:top;}
+ul,ol{list-style:none}
+fieldset{border:none}
+fieldset legend {overflow:hidden;width:0;height:0;margin:0;padding:0;font-size:0;line-height:0;text-indent:-999em;}
+button{cursor:pointer}
+header,hgroup,article,nav,footer,figure,figcaption,canvas,section,time{display:block}
+hr {clear:both;display:none;}
+img[usemap] {border:none; height:auto; max-width:100%; width:auto;}
+
+a{
+	color:inherit;
+	text-decoration:none;
+	-webkit-transition: all 0.2s ease-in-out;
+	   -moz-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+		 -o-transition: all 0.2s ease-in-out;
+			transition: all 0.2s ease-in-out;
+}
+a:hover,
+a:active{
+	-webkit-transition: all 0.2s ease-in-out;
+	   -moz-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+		 -o-transition: all 0.2s ease-in-out;
+			transition: all 0.2s ease-in-out;
+}
+
+::-webkit-input-placeholder {color:#ccc;}
+:-moz-placeholder {color:#ccc;}
+::-moz-placeholder {color:#ccc;}
+:-ms-input-placeholder {color:#ccc;}
+:placeholder-shown {color:#ccc;}
+
+table caption {overflow:hidden;width:0;height:0;margin:0;padding:0;font-size:0;line-height:0;text-indent:-999em;}
+input[type="radio"], input[type="checkbox"] {vertical-align:middle !important; margin:-.2em 3px 0 0 !important;}
+input,select {vertical-align:middle; background:#fff;}
+input,textarea,button{-webkit-appearance:none;-webkit-border-radius:0}
+input[type='checkbox']{-webkit-appearance:checkbox} 
+input[type='radio']{-webkit-appearance:radio}
+
+/* user class */
+h1,h2,h3,h4,h5,h6,strong,th,.bold{font-weight:700;}
+.semibold {font-weight:600;}
+.clear{clear:both;}
+.clearfix:after {content:" "; display:block; clear:both;}
+.blind {position:absolute;overflow:hidden;width:0;height:0;margin:0;padding:0;font-size:0;line-height:0;}
+.pointer {cursor:pointer;}
+.input {height:44px; padding:6px 16px; color:#505050; font-size:15px; line-height:1.5em; border:1px solid #ddd;}
+.input[readonly] {background-color:#e8e8e8; color:#aaaaaa;}
+.input.datepicker {padding-right:40px; background:#fff url('/images/bbs/datepicker_icon.png') right 10px center no-repeat;}
+textarea.input {height:auto; padding:13px 16px; overflow:auto; resize:none;}
+select.input {padding-right:40px; background:#fff url('/images/bbs/select.png') right 14px center no-repeat; -webkit-appearance:none; -moz-appearance:none; appearance:none;}
+select.input::-ms-expand {display:none;}
+input[type=file].input {padding:0;}
+input[type=password]{font-family:"Noto Sans KR",sans-serif;}
+
+.mgb2 {margin-bottom:2px !important;}
+.mgb3 {margin-bottom:3px !important;}
+.mgb4 {margin-bottom:4px !important;}
+.mgb5 {margin-bottom:5px !important;}
+.mgb6 {margin-bottom:6px !important;}
+.mgb7 {margin-bottom:7px !important;}
+.mgb8 {margin-bottom:8px !important;}
+.mgb9 {margin-bottom:9px !important;}
+.mgb10 {margin-bottom:10px !important;}
+.mgb20 {margin-bottom:var(--space-20) !important;}
+.mgb30 {margin-bottom:var(--space-30) !important;}
+.mgb40 {margin-bottom:var(--space-40) !important;}
+.mgb50 {margin-bottom:var(--space-50) !important;}
+
+.fl {float:left;}
+.fr {float:right;}
+
+.space-center {text-align:center !important;}
+.space-right {text-align:right !important;}
+.space-left {text-align:left !important;}
+
+.inline-block {display:inline-block;}
+
+.video-container {position:relative; padding-bottom:56.25%; overflow:hidden;}
+.video-container video,
+.video-container iframe {position:absolute; top:0; left:0; width:100%; height:100%;}
+
+.radiobox {display:inline-block; position:relative; vertical-align:middle; margin-top:-.2em;}
+.radiobox input {position:absolute; top:0; left:0; width:0; height:0; border:0; opacity:0; z-index:-1;}
+.radiobox label {display:inline-block;}
+.radiobox label:before {content:""; display:inline-block; vertical-align:middle; margin:-.2em 8px 0 0; width:18px; height:18px; background-color:#f4f4f4; border:1px solid #ccc; border-radius:100%;}
+.radiobox input:checked + label:before {background:#fff url("/images/bbs/radiobox.png") 50% 50% no-repeat;}
+.radiobox input:focus + label:before {outline:2px solid highlight;}
+
+.checkbox {display:inline-block; position:relative; vertical-align:middle; margin-top:-.2em;}
+.checkbox input {position:absolute; top:0; left:0; width:0; height:0; border:0; opacity:0; z-index:-1;}
+.checkbox label {display:inline-block;}
+.checkbox label:before {content:""; display:inline-block; vertical-align:middle; margin:-.2em 8px 0 0; width:18px; height:18px; background-color:#f4f4f4; border:1px solid #ccc;}
+.checkbox input:checked + label:before {background:var(--color-primary) url("/images/bbs/checkbox.png") 50% 50% no-repeat; border-color:var(--color-primary);}
+.checkbox input:focus + label:before {outline:2px solid highlight;}
+
+.table-responsive {display:block; width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+
+/* ui datepicker */
+.ui-datepicker {display:none; background:#fff; margin-top:2px; border-radius:10px; padding:0 8px 8px; width:250px; box-shadow:0 0 3px rgba(0,0,0,.3);}
+.ui-datepicker-header {position:relative; margin:0 -8px 6px; padding:5px 0; background:var(--color-primary); border-radius:10px 10px 0 0;}
+.ui-datepicker-prev,
+.ui-datepicker-next {position:absolute; width:32px; height:32px; top:50%; cursor:pointer; margin-top:-16px; border-radius:100%; overflow:hidden; text-indent:-999em; background-position:50% 50%; background-repeat:no-repeat;}
+.ui-datepicker-prev {left:0; background-image:url("/images/bbs/datepicker_prev.png");}
+.ui-datepicker-next {right:0; background-image:url("/images/bbs/datepicker_next.png");}
+.ui-datepicker-title {text-align:center; color:#fff; font-size:18px; line-height:30px; font-weight:500;}
+.ui-datepicker-title select {border:0; margin:-.2em 2px 0; width:70px; height:30px; color:#000; font-size:15px; padding:0 10px 0 6px; vertical-align:middle;}
+.ui-datepicker-calendar {width:100%; border-collapse:collapse; border-spacing:0px;}
+.ui-datepicker-calendar th {padding:2px 0; text-align:center; font-size:14px; font-weight:500; line-height:30px; color:#222;}
+.ui-datepicker-calendar td {padding:0; text-align:center; font-size:13px; font-weight:400; line-height:30px; color:#666;}
+.ui-datepicker-calendar .ui-state-default {display:inline-block;width:30px;border-radius:4px;}
+.ui-datepicker-calendar .ui-state-hover {background-color:#eee; color:#222;}
+.ui-datepicker-calendar .ui-state-active {background-color:var(--color-primary); color:#fff;}
+.ui-datepicker-other-month .ui-state-default {color:#ccc;}
+.ui-datepicker-last {margin-left:-43px;}
+.ui-datepicker-trigger {width:44px; height:44px; margin-left:-1px; background:url('/images/bbs/datepicker_icon.png') 50% 50% no-repeat; border:1px solid #aaa; vertical-align:middle; overflow:hidden; text-indent:-999em;}
+
+@media (max-width: 640px) {
+	.input.datepicker {background-image:url("../images/bbs/datepicker_icon_x2.png"); background-size:22px auto;}
+
+	.ui-datepicker-prev,
+	.ui-datepicker-next {background-size:8px auto;}
+	.ui-datepicker-prev {background-image:url("../images/bbs/datepicker_prev_x2.png");}
+	.ui-datepicker-next {background-image:url("../images/bbs/datepicker_next_x2.png");}
+	.ui-datepicker-trigger {width:38px; height:38px;}
+}
