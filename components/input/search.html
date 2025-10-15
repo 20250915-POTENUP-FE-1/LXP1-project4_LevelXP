@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #search-site {
+        padding: 11px;
+        width: 380px;
+        height: 30px;
+        position: relative;
+        display: flex;
+        border: 2px solid rgb(193, 170, 170);
+        border-radius: 30px;
+      }
+      .search:focus {
+        outline: none;
+      }
+      .search {
+        box-sizing: border-box;
+        padding: none;
+        margin: none;
+        width: 400px;
+        height: 30px;
+        border: none;
+        margin-left: 20px;
+        font-size: 12px;
+      }
+      .wrap {
+        width: 55px;
+        height: 44px;
+        border-radius: 50px;
+        border: none;
+        margin: 0 auto;
+        position: relative;
+        top: -7.5px;
+        color: rgb(0, 0, 0);
+      }
+      .wrap:hover {
+        background-color: rgb(216, 208, 208);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="search-site">
+      <input
+        type="search"
+        class="search"
+        placeholder="우리는 집에가고 싶습니다."
+      />
+      <button class="wrap">검색</button>
+    </div>
+  </body>
+</html>
