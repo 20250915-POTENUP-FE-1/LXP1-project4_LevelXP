@@ -404,10 +404,16 @@
   align-items: center;
   width: 100%;
   text-align: center;
-  background: #eee;
+  background: #aed4ff;
   padding: 40px;
   border-radius: 20px;
   margin: 40px 0;
+}
+.sub-visual .tt-wrap.be {
+     background: var(--color-primary);
+}
+.sub-visual .tt-wrap.admin {
+     background: #6366f1;
 }
 
 .sub-visual .tt-wrap .tit {
