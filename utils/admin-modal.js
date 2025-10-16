@@ -137,7 +137,6 @@
         }
       });
 
-      // 3️⃣ ✨ 여기에 새 코드 붙이기 (이게 “remove file button” 부분 대체 코드임)
       this.modalEl.addEventListener('click', (e) => {
         const removeBtn = e.target.closest('[data-role="remove-file"]');
         if (!removeBtn) return;
@@ -172,7 +171,7 @@
         }
       });
 
-      // 4️⃣ 폼 제출
+      // 4. form 제출
       if (this.formEl) {
         const newForm = this.formEl.cloneNode(true);
         this.formEl.parentNode.replaceChild(newForm, this.formEl);
@@ -187,8 +186,6 @@
 
       this._bound = true;
     }
-
-
 
     show() {
       if (!this.modalEl) return;
