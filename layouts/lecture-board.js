@@ -8,6 +8,7 @@ class LectureBoard extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = `
 			<head>
+				<link rel="stylesheet" href="/css/lecture.css" />
 				<link rel="stylesheet" href="/css/lecture-board.css" />
 				<link rel="stylesheet" href="/css/board.css" />
 				<link rel="stylesheet" href="/css/reset.css" />
@@ -37,7 +38,7 @@ class LectureBoard extends HTMLElement {
 								class="input"
 								title="검색어"
 							/>
-							<button type="submit" class="btn-pack medium primary">
+							<button type="submit" class="btn-pack medium dark">
 								검색하기
 							</button>
 						</div>
