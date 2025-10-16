@@ -5,6 +5,7 @@ class LectureComponent extends HTMLElement {
     const price = this.getAttribute("price") || "₩100,000";
     const recommandedCompany =
       this.getAttribute("recommandedCompany") || undefined;
+
     const isAdmin = this.getAttribute("isAdmin") === "true";
 
     this.innerHTML = `
@@ -36,8 +37,8 @@ class LectureComponent extends HTMLElement {
                 ? `
 								<div class="buttons">
 									<div class="fr">
-										<a href="#" class="btn-pack small edit">수정</a>
-										<a href="#" class="btn-pack small delete">삭제</a>
+										<a href="#" class="btn-pack small btn-edit">수정</a>
+										<a href="#" class="btn-pack small btn-delete">삭제</a>
 									</div>
 								</div>
 							`
