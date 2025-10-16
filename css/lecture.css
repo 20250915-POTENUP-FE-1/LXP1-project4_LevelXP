@@ -70,12 +70,12 @@
   font-size: 12px;
   border-radius: 10px;
 }
-.course-card .meta .buttons .btn-pack.edit:hover {
+.course-card .meta .buttons .btn-pack.btn-edit:hover {
   color: #fff;
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
-.course-card .meta .buttons .btn-pack.delete:hover {
+.course-card .meta .buttons .btn-pack.btn-delete:hover {
   color: #fff;
   background-color: #f00;
   border-color: #f00;
