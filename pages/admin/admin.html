@@ -16,7 +16,6 @@
     <div class="real-cont">
 
       <!--// content -->
-      <!--// 리스트 -->
       <form method="post">
         <div class="board-search">
           <div class="total-page">전체 : 1 / 10</div>
@@ -28,8 +27,9 @@
             </select>
           </div>
           <!--강의등록 버튼클릭시 강의등록 모달창이 나옵니다 -->
-          <a href="#" class="btn-pack medium primary btn-regist">강의등록</a>
-
+          <a href="#" class="btn-pack medium third btn-regist">강의등록</a>
+          <div id="modal-wrap"></div>
+    
           <div class="search">
             <input
               type="search"
@@ -38,7 +38,7 @@
               class="input"
               title="검색어"
             />
-            <button type="submit" class="btn-pack medium primary">검색하기</button>
+            <button type="submit" class="btn-pack medium dark">검색하기</button>
           </div>
         </div>
       </form>
@@ -81,9 +81,7 @@
               </div>
               <div class="meta">
                 <div class="btn-pack small cate bg-be">백엔드-java</div>
-                
                 <h3 class="course-title">
-                  
                   한 입 크기로 잘라 먹는 리액트(React.js) : 기초부터 실전까지
                 </h3>
                 <p class="instructor">이정환</p>
@@ -103,11 +101,8 @@
               </div>
             </div>
           </li>
-
-          
         </ul>
       </div>
-
       <div class="paginate">
         <a class="direction first" href="#"><span>처음페이지</span></a
         ><a class="direction prev" href="#"><span>이전페이지</span></a
@@ -116,12 +111,6 @@
         ><a class="direction next" href="#"><span>다음페이지</span></a
         ><a class="direction last" href="#"><span>마지막페이지</span></a>
       </div>
-      <!-- 리스트 //-->
-
-     
-
-
-     
       <!-- content //-->
 
     </div>
@@ -130,14 +119,69 @@
 
 <!-- 푸터 불러오기  -->
 <div id="footer-wrap"></div>
+
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"
 ></script>
+
 <script>
   $(function () {
     $("#header-wrap").load("/layouts/header.html");
     $("#footer-wrap").load("/layouts/footer.html");
+
+    // 모달 스크립트 안전 로드 + init
+    (function loadAdminModal(){
+      var src = '/utils/admin-modal.js';
+      if (window.AdminModal) {
+        try { AdminModal.init({ container: '#modal-wrap' }); } catch(e) {}
+        return;
+      }
+      // 중복 로드 방지
+      if (document.querySelector('script[src="' + src + '"]')) return;
+      var script = document.createElement('script');
+      script.src = src;
+      script.onload = function () {
+        if (window.AdminModal) {
+          try { AdminModal.init({ container: '#modal-wrap' }); } catch(e) {}
+        }
+      };
+      document.body.appendChild(script);
+    })();
+
+    // 강의등록 버튼 클릭 -> 모달 열기 (로드/초기화가 늦어져도 재시도)
+    $(document).on('click', '.btn-regist', function (e) {
+      e.preventDefault();
+
+      function openWhenReady(attempts) {
+        attempts = attempts || 0;
+        if (window.AdminModal && typeof AdminModal.show === 'function') {
+          try {
+            // ensure init called once
+            if (typeof AdminModal.init === 'function') AdminModal.init({ container: '#modal-wrap' });
+            AdminModal.show();
+          } catch (err) {
+            console.error(err);
+          }
+          return;
+        }
+        if (attempts < 20) {
+          setTimeout(function(){ openWhenReady(attempts + 1); }, 100);
+        } else {
+          console.warn('AdminModal not available.');
+        }
+      }
+
+      // 시도 시작
+      openWhenReady(0);
+    });
+
+    // 모달 저장 이벤트 처리
+    document.addEventListener('adminModal:submit', function (ev) {
+      var formData = ev.detail || {};
+      console.log('adminModal submit detail:', formData);
+      // TODO: 실제 저장 처리(서버 전송 등)를 여기에 구현
+    }, false);
   });
 </script>

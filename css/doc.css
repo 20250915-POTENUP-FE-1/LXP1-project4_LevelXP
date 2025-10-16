@@ -43,7 +43,7 @@
 .btn-confirm { background:#2b6cff; color:#fff; } 
 
 /* 관리자페이지  */
-.btn-pack.btn-regist {margin-left: 16px; border-radius: 10px;  background:#2b6cff; color:#fff;  border: 0; }
+.btn-pack.btn-regist {margin-left: 16px; border-radius: 10px; }
 
 .btn-pack.cate { margin-bottom: 8px !important;
 border-radius: 10px !important;  color:#fff !important; 

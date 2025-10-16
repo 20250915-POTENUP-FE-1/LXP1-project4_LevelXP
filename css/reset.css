@@ -14,7 +14,8 @@
 :root {
   /* color */
   --color-primary: #0078ff;
-  --color-secondary: #be4298;
+  --color-secondary: #6366f1;
+  --color-third: #21b5ff;
   --color-dark: #242424;
   /* --color-gradient:  linear-gradient(90deg, rgba(98,64,153,1) 0%, rgba(190,66,152,1) 100%); */
 

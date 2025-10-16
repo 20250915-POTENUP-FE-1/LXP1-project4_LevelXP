@@ -404,23 +404,23 @@
   align-items: center;
   width: 100%;
   text-align: center;
-  background: #aed4ff;
+  background: var(--color-primary);
   padding: 40px;
   border-radius: 20px;
   margin: 40px 0;
 }
 .sub-visual .tt-wrap.be {
-     background: var(--color-primary);
+     background: var(--color-secondary);
 }
 .sub-visual .tt-wrap.admin {
-     background: #6366f1;
+     background: var(--color-third);
 }
 
 .sub-visual .tt-wrap .tit {
   font-size: var(--font-size-32);
   line-height: 1em;
   font-weight: 800;
-  color: #000;
+  color: #fff;
 }
 
 #footer {

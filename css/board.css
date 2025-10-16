@@ -213,6 +213,7 @@
 
 .btn-pack {display:inline-block;overflow:visible;position:relative;margin:0;padding:0 10px;background:#fafafa;color:#333;border:1px solid #ddd;text-align:center;text-decoration:none !important;vertical-align:top;white-space:nowrap;cursor:pointer;}
 .btn-pack.focus {background:var(--color-primary); border:1px solid var(--color-primary); color:#fff;}
+.btn-pack.third {background:var(--color-third); border:1px solid var(--color-third); color:#fff;}
 .btn-pack.dark {background:#555; border:1px solid #555; color:#fff;}
 .btn-pack.border {background:#fff; border:1px solid var(--color-primary); color:var(--color-primary);}
 .btn-pack.small {height:30px;padding:0 15px;line-height:28px;font-size:13px;}
