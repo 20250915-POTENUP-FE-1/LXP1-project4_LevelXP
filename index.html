@@ -1,5 +1,7 @@
 <!-- header 불러오기  -->
-<div id="header-wrap"></div>
+<div id="header-wrap">
+  <header-component></header-component>
+</div>
 
 <main>
   <!-- Swiper -->
@@ -106,19 +108,36 @@
         </li>
       </ul>
     </div>
+    <button class="asdf">asdf</button>
+    <dialog id="confirmModal" class="modal"></dialog>
   </div>
 </main>
 
 <!-- 푸터 불러오기  -->
-<div id="footer-wrap"></div>
+<div id="footer-wrap">
+  <footer-component></footer-component>
+</div>
+
+<script>
+  document.querySelector(".asdf").addEventListener("click", function () {
+    const modal = document.getElementById("confirmModal");
+    modal.showModal();
+  });
+</script>
+<script type="module" src="/layouts/modal.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"
 ></script>
-<script>
-  $(function () {
-    $("#header-wrap").load("/layouts/header.html");
-    $("#footer-wrap").load("/layouts/footer.html");
-  });
+<script src="/utils/script.js"></script>
+<script src="/libs/swiper-bundle.min.js"></script>
+<script type="module">
+  import { attachComponent } from "/utils/component.js";
+  import { Modal } from "/components/modal/modal.js";
+  import { HeaderComponent } from "/layouts/header.js";
+  import { FooterComponent } from "/layouts/footer.js";
+
+  // attachComponent("/layouts/header.html", "header-wrap", "/utils/script.js");
+  // attachComponent("/layouts/footer.html", "footer-wrap");
 </script>

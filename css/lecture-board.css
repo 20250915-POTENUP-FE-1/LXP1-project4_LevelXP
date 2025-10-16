@@ -1,0 +1,23 @@
+#lecture-list {
+  padding: 25px 0 0 0;
+  border-bottom: 1px solid #ddd;
+  border-top: 2px solid #868686;
+}
+#lecture-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+#lecture-list ul li {
+  width: 25%;
+  padding: 0 15px;
+  margin-bottom: 35px;
+  text-align: center;
+}
+#lecture-list ul li.none {
+  width: 100%;
+  padding: 70px 0;
+  margin: 0;
+  text-align: center;
+  color: #767676;
+}

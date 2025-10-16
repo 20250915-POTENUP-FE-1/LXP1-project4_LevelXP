@@ -1,21 +1,12 @@
-<!-- header 불러오기  -->
-<div id="header-wrap"></div>
+<!-- <!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<div class="sub-visual">
-  <div class="contain">
-    <div class="tt-wrap admin">
-      <div class="tit">관리자 페이지</div>
-    </div>
-  </div>
-</div>
-<div id="container">
-  <div id="contArea">
-    <div class="sub-title blind"> 
-      <h2>관리자 페이지</h2>
-    </div>
-    <div class="real-cont">
+    <link rel="stylesheet" href="/css/board.css" />
+    <link rel="stylesheet" href="/css/lecture-board.css" />
 
-      <!--// content -->
       <form method="post">
         <div class="board-search">
           <div class="total-page">전체 : 1 / 10</div>
@@ -26,7 +17,7 @@
               <option value="">이름순</option>
             </select>
           </div>
-          <!--강의등록 버튼클릭시 강의등록 모달창이 나옵니다 -->
+
           <a href="#" class="btn-pack medium third btn-regist">강의등록</a>
           <div id="modal-wrap"></div>
     
@@ -111,13 +102,13 @@
         ><a class="direction next" href="#"><span>다음페이지</span></a
         ><a class="direction last" href="#"><span>마지막페이지</span></a>
       </div>
-      <!-- content //-->
+
 
     </div>
   </div>
 </div>
 
-<!-- 푸터 불러오기  -->
+
 <div id="footer-wrap"></div>
 
 <script
@@ -184,4 +175,64 @@
       // TODO: 실제 저장 처리(서버 전송 등)를 여기에 구현
     }, false);
   });
-</script>
+</script> -->
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/board.css" />
+    <link rel="stylesheet" href="/css/lecture-board.css" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/utils/script.js"></script>
+    <script type="module" src="/components/modal/modal.js"></script>
+    <script type="module" src="/layouts/header.js"></script>
+    <script type="module" src="/layouts/footer.js"></script>
+    <script type="module" src="/layouts/lecture-board.js"></script>
+    <script type="module" src="/components/lecture/lecture.js"></script>
+  </head>
+  <body>
+    <div id="header-wrap"><header-component /></div>
+    <div class="sub-visual">
+      <div class="contain">
+        <div class="tt-wrap be">
+          <div class="tit">Java</div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div id="contArea">
+        <div class="sub-title blind">
+          <h2>Java</h2>
+        </div>
+        <div class="real-cont">
+          <lecture-board id="lecture-list" isAdmin="true">
+            <ul>
+              <li>
+                <lecture-item title="gd" isAdmin="true" />
+              </li>
+              <li>
+                <lecture-item title="gd" />
+              </li>
+              <li>
+                <lecture-item title="gd" />
+              </li>
+            </ul>
+          </lecture-board>
+          <modal-component title="asdfsdafadsfas">
+            <p><strong>HTML 요소</strong>를 넣을 수 있습니다.</p>
+          </modal-component>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer-wrap"><footer-component /></div>
+    <div id="modal-wrap"></div>
+  </body>
+</html>
