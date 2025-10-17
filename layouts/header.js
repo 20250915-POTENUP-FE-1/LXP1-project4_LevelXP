@@ -59,7 +59,6 @@ class HeaderComponent extends HTMLElement {
         <link rel="stylesheet" type="text/css" href="/css/pretendard.css" />
         <link rel="stylesheet" type="text/css" href="/css/layout.css" />
         <!-- sub 공통 css  -->
-        <link rel="stylesheet" type="text/css" href="/css/doc.css" />
         <link rel="stylesheet" type="text/css" href="/css/board.css" />
         <link rel="stylesheet" type="text/css" href="/css/reset.css" />
 

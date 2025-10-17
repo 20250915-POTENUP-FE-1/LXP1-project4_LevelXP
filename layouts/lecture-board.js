@@ -1,18 +1,11 @@
 import { getLectureElementList } from "../utils/lecture.js";
 import { getLectureList, initializeLectureData } from "/utils/localStorage.js";
+import { LectureBoardHandler } from "/utils/handler/lectureBoardHandler.js";
 
 // lecture-board.js — connectedCallback 교체 (shadow 내부 클릭을 받아 composed event로 라이트로 전달, 수정 버튼은 composedPath로 소속 카드 찾음)
 class LectureBoard extends HTMLElement {
   connectedCallback() {
     const isAdmin = this.getAttribute("isAdmin") === "true";
-
-    // initializeLectureData();
-    const lectureList = getLectureElementList(getLectureList(), isAdmin).join(
-      ""
-    );
-
-    // lecture-board에 lecture 컴포넌트 등록
-    document.getElementById("lecture-list").innerHTML = lectureList;
 
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = `
@@ -42,7 +35,6 @@ class LectureBoard extends HTMLElement {
 
 				<div id="lecture-list">
 					<ul>
-						${lectureList}
 					</ul>
 				</div>
 				<div class="paginate">
@@ -55,6 +47,8 @@ class LectureBoard extends HTMLElement {
 				</div>
 			</body>
     `;
+
+    this.handler = new LectureBoardHandler(this, isAdmin);
 
     // shadow 내부 클릭을 외부(라이트 DOM)로 전달하기 위해 composed custom event 발행
     this.shadowRoot.addEventListener("click", (event) => {

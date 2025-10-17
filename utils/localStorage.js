@@ -167,12 +167,22 @@ function updateLecture(lectureIndex, newData) {
   return list[index];
 }
 
+function searchLectures(keyword) {
+  const list = getLectureList();
+  if (!keyword) return list;
+
+  return list.filter((lecture) =>
+    lecture.title.toLowerCase().includes(keyword.toLowerCase())
+  );
+}
+
 window.initializeLectureData = initializeLectureData;
 window.getLectureList = getLectureList;
 window.getLecture = getLecture;
 window.saveLecture = saveLecture;
 window.deleteLecture = deleteLecture;
 window.updateLecture = updateLecture;
+window.searchLectures = searchLectures;
 
 export {
   getLecture,
@@ -181,4 +191,5 @@ export {
   saveLecture,
   deleteLecture,
   updateLecture,
+  searchLectures,
 };
