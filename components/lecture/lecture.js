@@ -3,6 +3,7 @@ import { bindAdminModal } from "/components/modal/lecture-admin-handler.js";
 
 class LectureComponent extends HTMLElement {
   connectedCallback() {
+    const id = this.getAttribute("id") || "";
     const title = this.getAttribute("title") || "강의 제목";
     const instructor = this.getAttribute("instructor") || "강사 이름";
     const price = this.getAttribute("price") || "100,000";
