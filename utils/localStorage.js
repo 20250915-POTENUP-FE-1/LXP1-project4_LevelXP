@@ -1,31 +1,40 @@
 const LECTURE_STORAGE_KEY = "levelxp_lectures";
-const LECTURE_DATA = {
-  id: "00001",
-  title: "자바스크립트 어쩌고저쩌고",
-};
 const data = [
   {
     id: "00001",
+    type: "typescript",
+    title: "스크립트 저쩌고",
+    teacher: "개똥이",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: "00001",
+    type: "typescript",
+    title: "스크립트 저쩌고",
+
+    teacher: "개똥이",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: "00001",
+    type: "typescript",
+    title: "스크립트 저쩌고",
+
+    teacher: "개똥이",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: "00001",
+    type: "typescript",
     title: "자바스크립트 어쩌고저쩌고",
-  },
-  {
-    id: "00002",
-    title: "HTML 기초",
-  },
-  {
-    id: "00003",
-    title: "CSS 기초",
-  },
-  {
-    id: "00004",
-    title: "프론트엔드 개발 시작하기",
-  },
-  {
-    id: "00005",
-    title: "웹 접근성 이해하기",
+    teacher: "개똥이",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
   },
 ];
-
 function initializeLectureData() {
   // 배열로 되어있는 강의목록(data)를 로컬스토리지에 저장을 하기
   localStorage.setItem(LECTURE_STORAGE_KEY, JSON.stringify(data));
@@ -71,18 +80,25 @@ function updateLecture(lectureID, newData) {
     return null;
   }
 
-  console.log(list[index]);
-
   list[index] = { ...list[index], ...newData };
-  console.log(list[index]);
-  console.log(list);
 
   localStorage.setItem(LECTURE_STORAGE_KEY, JSON.stringify(list));
 
   return list[index];
 }
 
+// 로컬스토에이지에서 검색어로 아이템 찾기(배열로)
+// keyword: 검색어
+function searchLectureByKeyword(keyword) {
+  const searchterm = getLectureList() ?? [];
+
+  const coursesearch = searchterm.filter((l) => l.title.includes(keyword));
+
+  return coursesearch;
+}
+
 export {
+  searchLectureByKeyword,
   getLecture,
   initializeLectureData,
   getLectureList,

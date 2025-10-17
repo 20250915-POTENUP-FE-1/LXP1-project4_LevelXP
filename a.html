@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button class="asdf">초기 데이터 세팅</button>
+      <button class="ASDASD">수정하기</button>
+      <button class="ASDAS">삭제</button>
+      <button class="ASDA">신규 강의 추가</button>
+      <button class="ASD">id 불러오기</button>
+      <input class="search" type="search"></input>
+      <button class="searchbtn">gumsak</button>
+    </div>
+  </body>
+
+  <script type="module">
+    import {
+      searchLectureByKeyword,
+      getLectureList,
+      initializeLectureData,
+      getLecture,
+      saveLecture,
+      deleteLecture,
+      updateLecture,
+    } from "./utils/localStorage.js";
+
+    document
+      .getElementsByClassName("asdf")[0]
+      .addEventListener("click", (e) => {
+        initializeLectureData();
+      });
+
+    document
+      .getElementsByClassName("ASDASD")[0]
+      .addEventListener("click", (e) => {
+        updateLecture("00001", { title: "딥 다이브" });
+      });
+    document
+      .getElementsByClassName("ASDAS")[0]
+      .addEventListener("click", (e) => {
+        deleteLecture("00001");
+      });
+    document
+      .getElementsByClassName("ASDA")[0]
+      .addEventListener("click", (e) => {
+        const LECTURE_DATA = {
+          id: "00001",
+          type: "typescript",
+          title: "자바스크립트 어쩌고저쩌고",
+          teacher: "개똥이",
+          img: "lecture-01.png",
+          name: "(주)레벨업",
+        };
+        saveLecture(LECTURE_DATA);
+      });
+
+    document.getElementsByClassName("ASD")[0].addEventListener("click", (e) => {
+      const lecture = getLecture("00001");
+      console.log(lecture);
+    });
+
+    document.querySelector(".searchbtn").addEventListener("click", (e) => {
+      const keyword = document.querySelector(".search").value;
+      // console.log(keyword)
+      const answer = searchLectureByKeyword(keyword)
+      console.log(answer)
+    })
+  </script>
+</html>
