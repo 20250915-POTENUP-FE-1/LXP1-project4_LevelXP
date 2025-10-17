@@ -1,4 +1,3 @@
-// ...existing code...
 (function(window, document){
   'use strict';
 
@@ -216,17 +215,22 @@
         if (data.instructor !== undefined) this.modalEl.querySelector('#edit-lecture-instructor').value = data.instructor;
         if (data.price !== undefined) this.modalEl.querySelector('#edit-lecture-price').value = data.price;
         if (data.cop !== undefined) this.modalEl.querySelector('#edit-lecture-cop').value = data.cop;
-        if (this.previewWrap) {
-          this.previewWrap.innerHTML = '';
-          if (data.imgSrc) {
-            const img = document.createElement('img');
-            img.src = data.imgSrc;
-            img.style.maxWidth = '200px';
-            this.previewWrap.appendChild(img);
-          }
+
+        // 이미지 미리보기 및 파일 input 초기화
+        if (this.previewWrap) this.previewWrap.innerHTML = '';
+
+        const fileInput = this.modalEl.querySelector('#upfile');
+        if (fileInput) fileInput.value = ''; // 파일 입력 초기화
+
+        if (data.imgSrc) {
+          const img = document.createElement('img');
+          img.src = data.imgSrc;
+          img.style.maxWidth = '200px';
+          this.previewWrap.appendChild(img);
         }
       } catch (e) { /* ignore */ }
     }
+
 
     getFormData() {
       if (!this.modalEl) return null;
