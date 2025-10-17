@@ -146,7 +146,7 @@ function deleteLecture(lectureIndex) {
   const list = getLectureList();
 
   const newList = list.filter(
-    (lecture) => String(lecture.id) !== String(lectureId)
+    (lecture) => String(lecture.index) !== String(lectureIndex)
   );
 
   localStorage.setItem(LECTURE_STORAGE_KEY, JSON.stringify(newList));

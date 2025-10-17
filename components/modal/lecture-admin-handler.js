@@ -31,7 +31,8 @@ export function bindAdminModal(
     deleteBtn.addEventListener("click", (e) => {
       e.stopPropagation();
 
-      // if (confirm("정말 삭제하시겠습니까?")) shadowRoot.host.remove();
+      if (confirm("정말 삭제하시겠습니까?")) window.deleteLecture(dataIndex);
+      //  shadowRoot.host.remove();
     });
   }
 }
