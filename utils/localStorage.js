@@ -135,21 +135,19 @@ function saveLecture(lecture) {
 }
 
 // 개별적인 강의 하나 id를 통해 가져오기
-function getLecture(lectureId) {
+function getLecture(lectureIndex) {
   const list = getLectureList();
-  const target = list.find((l) => l.id === lectureId);
+  const target = list.find((l) => l.id === lectureIndex);
   return target || null;
 }
 
 // // 강의 데이터 삭제하기
-function deleteLecture(lectureId) {
-  if (!lectureId) {
-    localStorage.removeItem(LECTURE_STORAGE_KEY);
-    return;
-  }
-
+function deleteLecture(lectureIndex) {
   const list = getLectureList();
-  const newList = list.filter((l) => String(l.id) !== String(lectureId));
+
+  const newList = list.filter(
+    (lecture) => String(lecture.id) !== String(lectureId)
+  );
 
   localStorage.setItem(LECTURE_STORAGE_KEY, JSON.stringify(newList));
 }

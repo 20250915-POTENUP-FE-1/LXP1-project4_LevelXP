@@ -3,9 +3,10 @@ import { bindAdminModal } from "/components/modal/lecture-admin-handler.js";
 
 class LectureComponent extends HTMLElement {
   connectedCallback() {
-    const id = this.getAttribute("id") || "";
     const title = this.getAttribute("title") || "강의 제목";
     const instructor = this.getAttribute("instructor") || "강사 이름";
+    const categoryTitle = this.getAttribute("categoryTitle");
+    const categorySubTitle = this.getAttribute("categorySubTitle");
     const price = this.getAttribute("price") || "100,000";
     const detail =
       this.getAttribute("detail") || `${instructor} 강의 상세 내용`;
@@ -22,7 +23,9 @@ class LectureComponent extends HTMLElement {
         <div class="meta">
           ${
             isAdmin
-              ? `<div class="btn-pack small cate bg-be">백엔드-java</div>`
+              ? `<div class="btn-pack small cate bg-${
+                  categoryTitle === "FE" ? "fe" : "be"
+                }">${categoryTitle}-${categorySubTitle}</div>`
               : ""
           }
           <h3 class="course-title">${title}</h3>

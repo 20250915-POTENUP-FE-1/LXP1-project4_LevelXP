@@ -125,6 +125,8 @@ function getLectureElementList(lectureDataList, isAdmin = false) {
 			<lecture-item
         data-index="${lecture.index}"
 				title="${lecture.title}" 
+        categoryTitle="${lecture.categoryTitle}"
+        categorySubTitle="${lecture.categorySubTitle}"
 				instructor="${lecture.instructor}" 
 				price="₩${lecture.price.toLocaleString()}" 
 				recommandedCompany="${lecture.recommandedCompany || ""}"
