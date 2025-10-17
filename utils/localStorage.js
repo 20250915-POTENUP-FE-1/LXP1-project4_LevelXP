@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const LECTURE_STORAGE_KEY = "levelxp_lectures";
 const data = [
   {
@@ -31,13 +32,129 @@ const data = [
     type: "typescript",
     title: "자바스크립트 어쩌고저쩌고",
     teacher: "개똥이",
+=======
+const LECTURE_DATA = [
+  {
+    id: 1,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 123123,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 2,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 30000000000,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 3,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 4412412,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 4,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 123123,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 5,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 123123,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 6,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 123123,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 7,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 123123,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 8,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 123123,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 9,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 123123,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 10,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 123123,
+    isSoldout: true,
+    teacher: "홍길동",
+    img: "lecture-01.png",
+    name: "(주)레벨업",
+  },
+  {
+    id: 11,
+    title: "자바스크립트 어쩌고저쩌고",
+    type: "typescript",
+    price: 123123,
+    isSoldout: true,
+    teacher: "홍길동",
+>>>>>>> d5cd6e6d00644a39914704dbb39c85ce2c955a90
     img: "lecture-01.png",
     name: "(주)레벨업",
   },
 ];
+<<<<<<< HEAD
+=======
+
+const LECTURE_STORAGE_KEY = "levelxp_lectures";
+
+>>>>>>> d5cd6e6d00644a39914704dbb39c85ce2c955a90
 function initializeLectureData() {
   // 배열로 되어있는 강의목록(data)를 로컬스토리지에 저장을 하기
-  localStorage.setItem(LECTURE_STORAGE_KEY, JSON.stringify(data));
+  localStorage.setItem(LECTURE_STORAGE_KEY, JSON.stringify(LECTURE_DATA));
   //JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY)) ?? [];
 }
 
@@ -65,8 +182,10 @@ function deleteLecture(lectureId) {
     localStorage.removeItem(LECTURE_STORAGE_KEY);
     return;
   }
+
   const list = getLectureList();
   const newList = list.filter((l) => String(l.id) !== String(lectureId));
+
   localStorage.setItem(LECTURE_STORAGE_KEY, JSON.stringify(newList));
 }
 

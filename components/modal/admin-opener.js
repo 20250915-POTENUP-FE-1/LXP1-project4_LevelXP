@@ -1,4 +1,4 @@
-// ...existing code...
+
 class ModalOpener {
   constructor(opts = {}) {
     this.container = opts.container || '#modal-wrap';
@@ -17,9 +17,22 @@ class ModalOpener {
     });
   }
 
+  // 강의 버튼 클릭시 모달 오픈 - 초기화 수정 부분
   open(detail = {}) {
     return this.waitForAdminModal().then(() => {
       try {
+        // 항상 모달 초기화 먼저
+        window.AdminModal.setFormData({  // 폼값 초기화 추가
+          index: '',
+          category: '',
+          name: '',
+          instructor: '',
+          price: '',
+          cop: '',
+          imgSrc: ''
+        });
+
+        // 그 다음 전달된 데이터 채우기 (수정 시에만 값 있음)
         window.AdminModal.setHeader(detail.title || '');
         window.AdminModal.setFormData(detail.data || {});
         window.AdminModal.show();

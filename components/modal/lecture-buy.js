@@ -31,13 +31,18 @@ class LectureDetail extends HTMLElement {
     const backdrop = this.shadowRoot.querySelector(".modal-backdrop");
 
     // 닫기 버튼
-    this.shadowRoot.querySelector(".btn-cancel").addEventListener("click", () => this.remove());
+    this.shadowRoot
+      .querySelector(".btn-cancel")
+      .addEventListener("click", () => this.remove());
 
     // 확인 버튼 클릭 시 모달 제거 + alert
-    this.shadowRoot.querySelector(".btn-confirm").addEventListener("click", () => {
-      alert("구매가 완료되었습니다");
-      this.remove();
-    });
+    this.shadowRoot
+      .querySelector(".btn-confirm")
+      .addEventListener("click", () => {
+        // FIXME: buy 모달 이벤트 부분
+        alert("구매가 완료되었습니다");
+        this.remove();
+      });
 
     // 배경 클릭 시 모달 닫기
     backdrop.addEventListener("click", (e) => {

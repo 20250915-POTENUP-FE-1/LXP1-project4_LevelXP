@@ -1,11 +1,15 @@
 import { getLectureElementList } from "../utils/lecture.js";
+import { getLectureList, initializeLectureData } from "/utils/localStorage.js";
 
 // lecture-board.js — connectedCallback 교체 (shadow 내부 클릭을 받아 composed event로 라이트로 전달, 수정 버튼은 composedPath로 소속 카드 찾음)
 class LectureBoard extends HTMLElement {
   connectedCallback() {
     const isAdmin = this.getAttribute("isAdmin") === "true";
 
-    const lectureList = getLectureElementList(undefined, isAdmin).join("");
+    initializeLectureData();
+    const lectureList = getLectureElementList(getLectureList(), isAdmin).join(
+      ""
+    );
 
     // lecture-board에 lecture 컴포넌트 등록
     document.getElementById("lecture-list").innerHTML = lectureList;
@@ -106,12 +110,13 @@ class LectureBoard extends HTMLElement {
         };
         if (card) {
           // data-index 우선
-          if (card.dataset && card.dataset.index) data.index = card.dataset.index;
+          if (card.dataset && card.dataset.index)
+            data.index = card.dataset.index;
           // DOM에서 정보 추출(필요시 localStorage로 대체하는 로직은 admin-opener/admin script에서 처리)
-          const titleEl = card.querySelector('.course-title');
-          const instEl = card.querySelector('.instructor');
-          const priceEl = card.querySelector('.price');
-          const imgEl = card.querySelector('img');
+          const titleEl = card.querySelector(".course-title");
+          const instEl = card.querySelector(".instructor");
+          const priceEl = card.querySelector(".price");
+          const imgEl = card.querySelector("img");
           if (titleEl) data.name = titleEl.textContent.trim();
           if (instEl) data.instructor = instEl.textContent.trim();
           if (priceEl)
