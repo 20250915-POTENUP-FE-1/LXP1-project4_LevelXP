@@ -42,7 +42,7 @@ class LectureComponent extends HTMLElement {
 										<a href="#" class="btn-pack small btn-delete">삭제</a>
 									</div>
 								</div>
-							`
+								`
                 : ""
             }
 					</div>
