@@ -11,11 +11,17 @@
     <form id="lectureForm" class="modal-form">
       <input type="hidden" id="edit-lecture-index">
       <div class="cate">
-        <select id="edit-lecture-category" class="input" title="분류선택">
+        <select id="edit-lecture-categoryTitle" class="input" title="분류선택">
           <option value="">분류선택</option>
-          <option value="fe-ts">Fe typescript</option>
-          <option value="fe-react">Fe react</option>
-          <option value="be-java">be java</option>
+          <option value="FE">FE</option>
+          <option value="BE">BE</option>
+        </select>
+      </div>
+      <div class="cate">
+        <select id="edit-lecture-categorySubTitle" class="input" title="분류선택">
+          <option value="">분류선택</option>
+          <option value="JavaScript">JavaScript</option>
+          <option value="TypeScript">TypeScript</option>
         </select>
       </div>
       <div class="form-group img-wrap">
@@ -27,8 +33,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="edit-lecture-name">강의명</label>
-        <input type="text" id="edit-lecture-name" class="form-input" required>
+        <label for="edit-lecture-title">강의명</label>
+        <input type="text" id="edit-lecture-title" class="form-input" required>
       </div>
       <div class="form-group">
         <label for="edit-lecture-instructor">강사명</label>
@@ -39,8 +45,8 @@
         <input type="text" id="edit-lecture-price" class="form-input" required>
       </div>
       <div class="form-group">
-        <label for="edit-lecture-cop">회사명</label>
-        <input type="text" id="edit-lecture-cop" class="form-input">
+        <label for="edit-lecture-recommandedCompany">회사명</label>
+        <input type="text" id="edit-lecture-recommandedCompany" class="form-input">
       </div>
       <div class="modal-actions">
         <button type="button" class="cancel-btn" data-role="close">취소</button>
@@ -195,14 +201,17 @@
           const ev = new CustomEvent("adminModal:submit", {
             detail: this.getFormData(),
           }); //
-          let index = this.modalEl.querySelector("#edit-lecture-index").value;
           // 변수에 저장되어있는 데이터를 함수에 사용
           // FIXME: form submit 이벤트 부분
+          const headerText =
+            this.modalEl.querySelector(".modal-header h3").textContent || "";
 
-          if (강의등록) {
-            console.log("asdf");
-          } else {
-            console.log(asdfdsfsdfsd);
+          if (headerText === "강의등록") {
+            ev.detail.index = window.getLectureList().length + 1;
+            window.saveLecture(ev.detail); // 강의 저장 함수 호출
+          } else if (headerText === "강의 수정") {
+            console.log(ev.detail.index, 11);
+            window.updateLecture(ev.detail.index, ev.detail); // 강의 수정 함수 호출
           }
 
           document.dispatchEvent(ev);
@@ -234,18 +243,22 @@
       try {
         if (data.index !== undefined)
           this.modalEl.querySelector("#edit-lecture-index").value = data.index;
-        if (data.category !== undefined)
-          this.modalEl.querySelector("#edit-lecture-category").value =
-            data.category;
-        if (data.name !== undefined)
-          this.modalEl.querySelector("#edit-lecture-name").value = data.name;
+        if (data.categoryTitle !== undefined)
+          this.modalEl.querySelector("#edit-lecture-categoryTitle").value =
+            data.categoryTitle;
+        if (data.categorySubTitle !== undefined)
+          this.modalEl.querySelector("#edit-lecture-categorySubTitle").value =
+            data.categorySubTitle;
+        if (data.title !== undefined)
+          this.modalEl.querySelector("#edit-lecture-title").value = data.title;
         if (data.instructor !== undefined)
           this.modalEl.querySelector("#edit-lecture-instructor").value =
             data.instructor;
         if (data.price !== undefined)
           this.modalEl.querySelector("#edit-lecture-price").value = data.price;
-        if (data.cop !== undefined)
-          this.modalEl.querySelector("#edit-lecture-cop").value = data.cop;
+        if (data.recommandedCompany !== undefined)
+          this.modalEl.querySelector("#edit-lecture-recommandedCompany").value =
+            data.recommandedCompany;
 
         // 이미지 미리보기 및 파일 input 초기화
         if (this.previewWrap) this.previewWrap.innerHTML = "";
@@ -268,13 +281,18 @@
       if (!this.modalEl) return null;
       return {
         index: this.modalEl.querySelector("#edit-lecture-index").value || "",
-        category:
-          this.modalEl.querySelector("#edit-lecture-category").value || "",
-        name: this.modalEl.querySelector("#edit-lecture-name").value || "",
+        categoryTitle:
+          this.modalEl.querySelector("#edit-lecture-categoryTitle").value || "",
+        categorySubTitle:
+          this.modalEl.querySelector("#edit-lecture-categorySubTitle").value ||
+          "",
+        title: this.modalEl.querySelector("#edit-lecture-title").value || "",
         instructor:
           this.modalEl.querySelector("#edit-lecture-instructor").value || "",
         price: this.modalEl.querySelector("#edit-lecture-price").value || "",
-        cop: this.modalEl.querySelector("#edit-lecture-cop").value || "",
+        recommandedCompany:
+          this.modalEl.querySelector("#edit-lecture-recommandedCompany")
+            .value || "",
         file:
           (this.fileInput && this.fileInput.files && this.fileInput.files[0]) ||
           null,

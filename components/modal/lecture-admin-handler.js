@@ -1,4 +1,7 @@
-export function bindAdminModal(shadowRoot, { title, instructor, price, recommandedCompany, dataIndex }) {
+export function bindAdminModal(
+  shadowRoot,
+  { title, instructor, price, recommandedCompany, dataIndex }
+) {
   if (!shadowRoot) return;
 
   const editBtn = shadowRoot.querySelector(".btn-edit");
@@ -11,10 +14,10 @@ export function bindAdminModal(shadowRoot, { title, instructor, price, recommand
         detail: {
           title: "강의 수정",
           data: {
-            name: title,
+            title: title,
             instructor,
             price: price.replace(/[^0-9]/g, ""),
-            cop: recommandedCompany || "",
+            recommandedCompany: recommandedCompany || "",
             index: dataIndex,
           },
         },

@@ -115,19 +115,19 @@ const pageSize = 10;
 
 /**
  * 강의 목록을 HTML element list로 변환하는 함수
- * @param {Array} lectures localStorage에 등록된 lecture data list
+ * @param {Array} lectureDataList localStorage에 등록된 lecture data list
  */
 function getLectureElementList(lectureDataList, isAdmin = false) {
   // FIXME: localStorage에서 데이터 가져오기
-  // let lectureElementList = lectures.map((lecture) => {
-  let lectureElementList = LECTURE_DATA.map((lecture) => {
+  let lectureElementList = lectureDataList.map((lecture) => {
+    // let lectureElementList = LECTURE_DATA.map((lecture) => {
     return `<li>
 			<lecture-item
-        id="${lecture.title}"
+        data-index="${lecture.index}"
 				title="${lecture.title}" 
-				instructor="${lecture.teacher}" 
+				instructor="${lecture.instructor}" 
 				price="₩${lecture.price.toLocaleString()}" 
-				recommandedCompany="${lecture.name}"
+				recommandedCompany="${lecture.recommandedCompany || ""}"
 				isAdmin="${isAdmin}"
 			/>
 		</li>`;

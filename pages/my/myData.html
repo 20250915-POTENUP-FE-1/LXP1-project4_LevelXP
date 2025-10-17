@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/board.css" />
+    <link rel="stylesheet" href="/css/lecture-board.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="/layouts/header.js"></script>
+    <script type="module" src="/layouts/footer.js"></script>
+    <script src="/utils/script.js"></script>
+    <script src="/components/modal/admin-modal.js"></script>
+    <script type="module" src="/components/modal/admin-opener.js"></script>
+    <script type="module" src="/layouts/lecture-board.js"></script>
+    <script type="module" src="/components/lecture/lecture.js"></script>
+  </head>
+  <body>
+    <div id="header-wrap"><header-component /></div>
+    <div class="sub-visual">
+      <div class="contain">
+        <div class="tt-wrap my">
+          <div class="tit">마이페이지</div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div id="contArea">
+        <div class="sub-title blind">
+          <h2>마이페이지</h2>
+        </div>
+        <div class="real-cont">
+          <lecture-board id="lecture-list"></lecture-board>
+          <!-- <modal-component title="asdfsdafadsfas">
+            <p><strong>HTML 요소</strong>를 넣을 수 있습니다.</p>
+          </modal-component> -->
+        </div>
+      </div>
+    </div>
+
+    <div id="footer-wrap"><footer-component /></div>
+
+    <!-- modal container (라이트 DOM에 반드시 존재해야 AdminModal.init이 정상작동합니다) -->
+    <div id="modal-wrap"></div>
+  </body>
+</html>

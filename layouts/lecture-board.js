@@ -6,7 +6,7 @@ class LectureBoard extends HTMLElement {
   connectedCallback() {
     const isAdmin = this.getAttribute("isAdmin") === "true";
 
-    initializeLectureData();
+    // initializeLectureData();
     const lectureList = getLectureElementList(getLectureList(), isAdmin).join(
       ""
     );
@@ -17,7 +17,6 @@ class LectureBoard extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="/css/lecture.css" />
-      
       <link rel="stylesheet" href="/css/lecture-board.css" />
       <link rel="stylesheet" href="/css/board.css" />
       <link rel="stylesheet" href="/css/reset.css" />
@@ -117,7 +116,7 @@ class LectureBoard extends HTMLElement {
           const instEl = card.querySelector(".instructor");
           const priceEl = card.querySelector(".price");
           const imgEl = card.querySelector("img");
-          if (titleEl) data.name = titleEl.textContent.trim();
+          if (titleEl) data.title = titleEl.textContent.trim();
           if (instEl) data.instructor = instEl.textContent.trim();
           if (priceEl)
             data.price = (priceEl.textContent || "").replace(/[^0-9]/g, "");

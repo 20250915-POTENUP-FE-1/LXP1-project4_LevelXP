@@ -1,9 +1,12 @@
 {
+  "id": 1,
   "title": "자바스크립트 어쩌고저쩌고",
-  "type": "typescript",
+  "category": {
+    "title": "FE",
+    "subtitle": "JavaScript"
+  },
   "price": 30000000000,
-  "isSoldout": true,
-  "teacher": "홍길동",
+  "instructor": "홍길동",
   "img": "lecture-01.png",
-  "name": "(주)레벨업"
+  "recommandedCompany": "(주)레벨업"
 }

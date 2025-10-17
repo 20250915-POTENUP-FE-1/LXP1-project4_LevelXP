@@ -1,38 +1,3 @@
-<<<<<<< HEAD
-const LECTURE_STORAGE_KEY = "levelxp_lectures";
-const data = [
-  {
-    id: "00001",
-    type: "typescript",
-    title: "스크립트 저쩌고",
-    teacher: "개똥이",
-    img: "lecture-01.png",
-    name: "(주)레벨업",
-  },
-  {
-    id: "00001",
-    type: "typescript",
-    title: "스크립트 저쩌고",
-
-    teacher: "개똥이",
-    img: "lecture-01.png",
-    name: "(주)레벨업",
-  },
-  {
-    id: "00001",
-    type: "typescript",
-    title: "스크립트 저쩌고",
-
-    teacher: "개똥이",
-    img: "lecture-01.png",
-    name: "(주)레벨업",
-  },
-  {
-    id: "00001",
-    type: "typescript",
-    title: "자바스크립트 어쩌고저쩌고",
-    teacher: "개똥이",
-=======
 const LECTURE_DATA = [
   {
     id: 1,
@@ -141,23 +106,23 @@ const LECTURE_DATA = [
     price: 123123,
     isSoldout: true,
     teacher: "홍길동",
->>>>>>> d5cd6e6d00644a39914704dbb39c85ce2c955a90
     img: "lecture-01.png",
     name: "(주)레벨업",
   },
 ];
-<<<<<<< HEAD
-=======
 
 const LECTURE_STORAGE_KEY = "levelxp_lectures";
 
->>>>>>> d5cd6e6d00644a39914704dbb39c85ce2c955a90
 function initializeLectureData() {
   // 배열로 되어있는 강의목록(data)를 로컬스토리지에 저장을 하기
   localStorage.setItem(LECTURE_STORAGE_KEY, JSON.stringify(LECTURE_DATA));
   //JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY)) ?? [];
 }
 
+/**
+ *
+ * @returns {Array} 로컬스토리지에 저장된 강의목록 배열
+ */
 function getLectureList() {
   return JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY)) ?? [];
 }
@@ -190,14 +155,12 @@ function deleteLecture(lectureId) {
 }
 
 // // 강의 데이터 수정하기
-function updateLecture(lectureID, newData) {
+function updateLecture(lectureIndex, newData) {
   const list = getLectureList();
 
-  const index = list.findIndex((l) => String(l.id) === String(lectureID));
-  if (index === -1) {
-    console.warn("해당 강의가 존재하지 않습니다.");
-    return null;
-  }
+  const index = list.findIndex(
+    (lecture) => String(lecture.index) === String(lectureIndex)
+  );
 
   list[index] = { ...list[index], ...newData };
 
@@ -206,18 +169,14 @@ function updateLecture(lectureID, newData) {
   return list[index];
 }
 
-// 로컬스토에이지에서 검색어로 아이템 찾기(배열로)
-// keyword: 검색어
-function searchLectureByKeyword(keyword) {
-  const searchterm = getLectureList() ?? [];
-
-  const coursesearch = searchterm.filter((l) => l.title.includes(keyword));
-
-  return coursesearch;
-}
+window.initializeLectureData = initializeLectureData;
+window.getLectureList = getLectureList;
+window.getLecture = getLecture;
+window.saveLecture = saveLecture;
+window.deleteLecture = deleteLecture;
+window.updateLecture = updateLecture;
 
 export {
-  searchLectureByKeyword,
   getLecture,
   initializeLectureData,
   getLectureList,
