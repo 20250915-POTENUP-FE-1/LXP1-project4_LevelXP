@@ -7,8 +7,10 @@ class LectureComponent extends HTMLElement {
     const title = this.getAttribute("title") || "강의 제목";
     const instructor = this.getAttribute("instructor") || "강사 이름";
     const price = this.getAttribute("price") || "100,000";
-    const detail = this.getAttribute("detail") || `${instructor} 강의 상세 내용`;
-    const recommandedCompany = this.getAttribute("recommandedCompany") || undefined;
+    const detail =
+      this.getAttribute("detail") || `${instructor} 강의 상세 내용`;
+    const recommandedCompany =
+      this.getAttribute("recommandedCompany") || undefined;
     const isAdmin = this.getAttribute("isAdmin") === "true";
     const dataIndex = this.getAttribute("data-index") || "";
 
@@ -18,12 +20,20 @@ class LectureComponent extends HTMLElement {
       <div class="course-card ${isAdmin ? "admin" : ""}">
         <div class="thumb"><img src="/assets/images/sub/lecture-02.png" alt="" /></div>
         <div class="meta">
-          ${isAdmin ? `<div class="btn-pack small cate bg-be">백엔드-java</div>` : ""}
+          ${
+            isAdmin
+              ? `<div class="btn-pack small cate bg-be">백엔드-java</div>`
+              : ""
+          }
           <h3 class="course-title">${title}</h3>
           <p class="instructor">${instructor}</p>
           <p class="price">${price}원</p>
           <div class="co-recomm">
-            <span>${recommandedCompany ? `<strong>${recommandedCompany}</strong> 추천 강의!` : ""}</span>
+            <span>${
+              recommandedCompany
+                ? `<strong>${recommandedCompany}</strong> 추천 강의!`
+                : ""
+            }</span>
           </div>
           ${
             isAdmin
@@ -40,7 +50,14 @@ class LectureComponent extends HTMLElement {
     const card = this.shadowRoot.querySelector(".course-card");
 
     if (!isAdmin) bindUserModal(card, { title, detail, price });
-    if (isAdmin) bindAdminModal(this.shadowRoot, { title, instructor, price, recommandedCompany, dataIndex });
+    if (isAdmin)
+      bindAdminModal(this.shadowRoot, {
+        title,
+        instructor,
+        price,
+        recommandedCompany,
+        dataIndex,
+      });
   }
 }
 
