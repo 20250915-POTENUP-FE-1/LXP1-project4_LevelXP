@@ -1,0 +1,58 @@
+.content-book {
+  font-size: 11px;
+}
+.modal-btn {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  height: 35px;
+}
+.btn-cancel,
+.btn-confirm {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn-wrap {
+  font-size: 12px;
+}
+.btn-cancel {
+  background: #f1f3f5;
+  color: #222;
+}
+.btn-confirm {
+  background: #2b6cff;
+  color: #fff;
+}
+.content-book {
+  height: 100px;
+}
+.price {
+  font-size: 14px;
+  font-weight: 500;
+}
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+}
+.modal-buy {
+  text-align: end;
+  font-weight: 600;
+  font-size: 15px;
+}
+#message {
+  padding-bottom: 30px;
+}
+.title {
+  font-weight: 600;
+}
+.btn-confirm:hover {
+  background-color: #1849bc;
+}
+.btn-cancel:hover {
+  background-color: rgb(208, 207, 207);
+}
