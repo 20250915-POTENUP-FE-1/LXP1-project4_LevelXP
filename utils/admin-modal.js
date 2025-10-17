@@ -1,222 +1,246 @@
 // ...existing code...
 (function(window, document){
-  const TEMPLATE = `
-  <link rel="stylesheet" href="/css/modal-admin.css">
+  'use strict';
 
-  <div id="editModal" class="edit-modal" style="display:none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>강의 등록</h3>
-        <button type="button" class="modal-close" data-role="close">&times;</button>
+  class AdminModalComponent {
+    constructor() {
+      this.TEMPLATE = `
+<link rel="stylesheet" href="/css/modal-admin.css">
+<div id="lectureFormModal" class="edit-modal" style="display:none;">
+  <div class="modal-content">
+    <div class="modal-header"><h3>강의 등록</h3><button class="modal-close" data-role="close">&times;</button></div>
+    <form id="lectureForm" class="modal-form">
+      <input type="hidden" id="edit-lecture-index">
+      <div class="cate">
+        <select id="edit-lecture-category" class="input" title="분류선택">
+          <option value="">분류선택</option>
+          <option value="fe-ts">Fe typescript</option>
+          <option value="fe-react">Fe react</option>
+          <option value="be-java">be java</option>
+        </select>
       </div>
-      <form id="lecture" class="modal-form">
-        <input type="hidden" id="edit-lecture-index">
-        <div class="cate">
-          <select name="" class="input" title="분류선택">
-            <option value="">분류선택</option>
-            <option value="">Fe typescript</option>
-            <option value="">Fe next-js</option>
-            <option value="">Fe react</option>
-            <option value="">be java</option>
-            <option value="">be php</option>
-            <option value="">be python</option>
-          </select>
+      <div class="form-group img-wrap">
+        <label for="upfile">첨부파일</label>
+        <div class="files-upload-input">
+          <input type="file" id="upfile" accept="image/*" class="form-input" />
+          <div class="preview-wrap" id="preview-wrap"></div>
+          <button type="button" class="btn-pack btn-delete" data-role="remove-file">삭제</button>
         </div>
-        <div class="form-group img-wrap">
-          <label for="upfile">첨부파일</label>
-          <div id="files-upload" class="files-upload">
-            <div class="files-upload-group">
-              <div class="files-upload-input">
-                <input type="file" name="upfiles[]" class="input form-input" id="upfile" title="첨부파일" accept="image/*">
-                <div class="preview-wrap" id="preview-wrap"></div>
-                <div class="files-upload-btns">
-                  <button type="button"  class="btn-pack btn-delete" data-role="remove-file">삭제</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="edit-lecture-name">강의명</label>
-          <input type="text" id="edit-lecture-name" class="form-input" required>
-        </div>
-        <div class="form-group">
-          <label for="edit-lecture-instructor">강사명</label>
-          <input type="text" id="edit-lecture-instructor" class="form-input" required>
-        </div>
-        <div class="form-group">
-          <label for="edit-lecture-price">가격</label>
-          <input type="text" id="edit-lecture-price" class="form-input" required>
-        </div>
-        <div class="form-group">
-          <label for="edit-lecture-cop">회사명</label>
-          <input type="text" id="edit-lecture-cop" class="form-input" required>
-        </div>
-
-        <div class="modal-actions">
-          <button type="button" class="cancel-btn" data-role="close">취소</button>
-          <button type="submit" class="save-btn">저장</button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="form-group">
+        <label for="edit-lecture-name">강의명</label>
+        <input type="text" id="edit-lecture-name" class="form-input" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-lecture-instructor">강사명</label>
+        <input type="text" id="edit-lecture-instructor" class="form-input" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-lecture-price">가격</label>
+        <input type="text" id="edit-lecture-price" class="form-input" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-lecture-cop">회사명</label>
+        <input type="text" id="edit-lecture-cop" class="form-input">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" data-role="close">취소</button>
+        <button type="submit" class="save-btn">저장</button>
+      </div>
+    </form>
   </div>
-  `;
+</div>`.trim();
 
-  function createElementFromHTML(html) {
-    const div = document.createElement('div');
-    div.innerHTML = html.trim();
-    return div;
-  }
+      this.container = null;
+      this.modalEl = null;
+      this._bound = false;
+    }
 
-  function isImageFile(file) {
-    return file && file.type && file.type.indexOf('image/') === 0;
-  }
-
-  let containerEl = null;
-  let modalEl = null;
-  let fileInput = null;
-  let previewWrap = null;
-
-  const AdminModal = {
-    init: function(options = {}) {
+    init(options = {}) {
       const selector = options.container || '#modal-wrap';
       const container = document.querySelector(selector) || document.body;
       if (!container) return;
+      this.container = container;
 
-      // prevent double init
-      if (container.querySelector('#editModal')) {
-        containerEl = container;
-        modalEl = container.querySelector('#editModal');
-        fileInput = modalEl.querySelector('#upfile');
-        previewWrap = modalEl.querySelector('#preview-wrap');
-        this._bind();
-        return;
+      if (!container.querySelector('#lectureFormModal')) {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = this.TEMPLATE;
+        while (wrap.firstChild) container.appendChild(wrap.firstChild);
       }
 
-      const fragment = createElementFromHTML(TEMPLATE);
-      // append children of fragment into container
-      while (fragment.firstChild) container.appendChild(fragment.firstChild);
-      containerEl = container;
-      modalEl = container.querySelector('#editModal');
-      fileInput = modalEl.querySelector('#upfile');
-      previewWrap = modalEl.querySelector('#preview-wrap');
-
+      this.modalEl = container.querySelector('#lectureFormModal');
+      this._refreshRefs();
       this._bind();
-    },
+    }
 
-    _bind: function() {
-      if (!modalEl) return;
-      if (modalEl.dataset.bound === '1') return;
+    _refreshRefs() {
+      if (!this.modalEl) return;
+      this.fileInput = this.modalEl.querySelector('#upfile');
+      this.previewWrap = this.modalEl.querySelector('#preview-wrap');
+      this.formEl = this.modalEl.querySelector('#lectureForm');
+      this.headerTitle = this.modalEl.querySelector('.modal-header h3');
+    }
 
-      // 닫기 버튼 처리: 클릭 기본 동작 막고 모달 숨김
-      modalEl.addEventListener('click', function(e){
+    _bind() {
+      if (!this.modalEl || this._bound) return;
+
+      // 1️⃣ 닫기 버튼
+      this.modalEl.addEventListener('click', (e) => {
         const role = e.target.getAttribute && e.target.getAttribute('data-role');
-        if (role === 'close') {
-          // 버튼이 form 내부에 있을 경우 submit이 발생하는 것을 명시적으로 막음
-          if (e.preventDefault) e.preventDefault();
-          AdminModal.hide();
-          return;
+        if (role === 'close' || e.target.classList.contains('modal-overlay')) {
+          e.preventDefault && e.preventDefault();
+          this.hide();
         }
       });
 
-      // 파일 input은 기존 참조 유지(중복 바인딩 주의)
-      var currentInput = modalEl.querySelector('#upfile');
-      if (currentInput) {
-        var newInput = currentInput.cloneNode(true);
-        currentInput.parentNode.replaceChild(newInput, currentInput);
-        fileInput = newInput;
-        previewWrap = modalEl.querySelector('#preview-wrap');
-
-        fileInput.addEventListener('change', function(e){
-          const file = e.target.files && e.target.files[0];
-          if (previewWrap) previewWrap.innerHTML = '';
+      // 2️⃣ 파일 업로드 change 이벤트
+      this.modalEl.addEventListener('change', (e) => { 
+        const target = e.target;
+        if (!target) return;
+        if (target.id === 'upfile' || target.matches && target.matches('input[type="file"]#upfile')) {
+          this._refreshRefs();
+          if (!this.previewWrap) {
+            this.previewWrap = document.createElement('div');
+            this.previewWrap.id = 'preview-wrap';
+            const parent = target.parentNode || this.modalEl.querySelector('.files-upload-input') || this.modalEl;
+            parent.appendChild(this.previewWrap);
+          }
+          const file = target.files && target.files[0];
+          if (this.previewWrap) this.previewWrap.innerHTML = '';
           if (!file) return;
-          if (!isImageFile(file)) {
+          if (!file.type || file.type.indexOf('image/') !== 0) {
             alert('이미지 파일만 선택 가능합니다.');
-            fileInput.value = '';
+            try { target.value = ''; } catch (e) {}
             return;
           }
+          if (window.FileReader) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+              const img = document.createElement('img');
+              img.src = ev.target.result;
+              img.alt = '미리보기';
+              img.style.maxWidth = '200px';
+              img.style.display = 'block';
+              if (this.previewWrap) this.previewWrap.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+          } else {
+            const objectUrl = URL.createObjectURL(file);
+            const img = document.createElement('img');
+            img.src = objectUrl;
+            img.alt = '미리보기';
+            img.style.maxWidth = '200px';
+            img.style.display = 'block';
+            img.addEventListener('load', () => URL.revokeObjectURL(objectUrl));
+            if (this.previewWrap) this.previewWrap.appendChild(img);
+          }
+        }
+      });
 
-          const objectUrl = URL.createObjectURL(file);
-          const img = document.createElement('img');
-          img.src = objectUrl;
-          img.alt = '미리보기 이미지';
-          img.style.maxWidth = '200px';
-          img.style.marginTop = '10px';
-          img.style.display = 'block';
-          img.style.border = '1px solid #ddd';
-          img.style.borderRadius = '8px';
+      this.modalEl.addEventListener('click', (e) => {
+        const removeBtn = e.target.closest('[data-role="remove-file"]');
+        if (!removeBtn) return;
 
-          img.addEventListener('load', function() {
-            URL.revokeObjectURL(objectUrl);
+        e.preventDefault();
+        this._refreshRefs();
+
+        const input = this.modalEl.querySelector('#upfile') || this.fileInput;
+        if (input) {
+          try { input.value = ''; } catch (err) {}
+          try { input.dispatchEvent(new Event('change', { bubbles: true })); } catch (err) {}
+        }
+
+        let preview = this.modalEl.querySelector('#preview-wrap') || this.previewWrap;
+        if (preview) {
+          const imgs = Array.from(preview.querySelectorAll('img'));
+          imgs.forEach(img => {
+            try {
+              if (img.src && img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+            } catch (err) {}
+            img.remove();
           });
+          preview.innerHTML = '';
+        }
 
-          previewWrap.appendChild(img);
-        });
-      }
+        if (input && input.parentNode) {
+          try {
+            const fresh = input.cloneNode(true);
+            input.parentNode.replaceChild(fresh, input);
+            this._refreshRefs();
+          } catch (err) {}
+        }
+      });
 
-      // remove file 버튼
-      var removeBtn = modalEl.querySelector('[data-role="remove-file"]');
-      if (removeBtn) {
-        var newRemove = removeBtn.cloneNode(true);
-        removeBtn.parentNode.replaceChild(newRemove, removeBtn);
-        newRemove.addEventListener('click', function(e){
-          if (e.preventDefault) e.preventDefault();
-          AdminModal.removeFile();
-        });
-      }
-
-      // form submit: replace node to avoid duplicate handlers
-      var form = modalEl.querySelector('#lecture');
-      if (form) {
-        var newForm = form.cloneNode(true);
-        form.parentNode.replaceChild(newForm, form);
-        newForm.addEventListener('submit', function(e){
+      // 4. form 제출
+      if (this.formEl) {
+        const newForm = this.formEl.cloneNode(true);
+        this.formEl.parentNode.replaceChild(newForm, this.formEl);
+        this.formEl = newForm;
+        this.formEl.addEventListener('submit', (e) => {
           e.preventDefault();
-          const event = new CustomEvent('adminModal:submit', { detail: AdminModal.getFormData() });
-          document.dispatchEvent(event);
-          AdminModal.hide();
+          const ev = new CustomEvent('adminModal:submit', { detail: this.getFormData() });
+          document.dispatchEvent(ev);
+          this.hide();
         });
       }
 
-      modalEl.dataset.bound = '1';
-    },
-
-
-    show: function() {
-      if (!modalEl) return;
-      modalEl.style.display = 'block';
-    },
-
-    hide: function() {
-      if (!modalEl) return;
-      modalEl.style.display = 'none';
-    },
-
-    removeFile: function() {
-      if (!fileInput || !previewWrap) return;
-      fileInput.value = '';
-      previewWrap.innerHTML = '';
-    },
-
-    getFormData: function() {
-      if (!modalEl) return null;
-      const data = {
-        index: modalEl.querySelector('#edit-lecture-index').value || '',
-        category: modalEl.querySelector('.cate select').value || '',
-        name: modalEl.querySelector('#edit-lecture-name').value || '',
-        instructor: modalEl.querySelector('#edit-lecture-instructor').value || '',
-        price: modalEl.querySelector('#edit-lecture-price').value || '',
-        cop: modalEl.querySelector('#edit-lecture-cop').value || '',
-        file: (fileInput && fileInput.files && fileInput.files[0]) || null
-      };
-      return data;
+      this._bound = true;
     }
-  };
 
-  // expose globally for easy use
-  window.AdminModal = AdminModal;
-  window.removeFile = function(){ AdminModal.removeFile(); };
+    show() {
+      if (!this.modalEl) return;
+      this.modalEl.style.display = 'block';
+    }
+
+    hide() {
+      if (!this.modalEl) return;
+      this.modalEl.style.display = 'none';
+    }
+
+    setHeader(text) {
+      this._refreshRefs();
+      if (this.headerTitle) this.headerTitle.textContent = text || '';
+    }
+
+    setFormData(data = {}) {
+      this._refreshRefs();
+      if (!this.modalEl) return;
+      try {
+        if (data.index !== undefined) this.modalEl.querySelector('#edit-lecture-index').value = data.index;
+        if (data.category !== undefined) this.modalEl.querySelector('#edit-lecture-category').value = data.category;
+        if (data.name !== undefined) this.modalEl.querySelector('#edit-lecture-name').value = data.name;
+        if (data.instructor !== undefined) this.modalEl.querySelector('#edit-lecture-instructor').value = data.instructor;
+        if (data.price !== undefined) this.modalEl.querySelector('#edit-lecture-price').value = data.price;
+        if (data.cop !== undefined) this.modalEl.querySelector('#edit-lecture-cop').value = data.cop;
+        if (this.previewWrap) {
+          this.previewWrap.innerHTML = '';
+          if (data.imgSrc) {
+            const img = document.createElement('img');
+            img.src = data.imgSrc;
+            img.style.maxWidth = '200px';
+            this.previewWrap.appendChild(img);
+          }
+        }
+      } catch (e) { /* ignore */ }
+    }
+
+    getFormData() {
+      if (!this.modalEl) return null;
+      return {
+        index: this.modalEl.querySelector('#edit-lecture-index').value || '',
+        category: this.modalEl.querySelector('#edit-lecture-category').value || '',
+        name: this.modalEl.querySelector('#edit-lecture-name').value || '',
+        instructor: this.modalEl.querySelector('#edit-lecture-instructor').value || '',
+        price: this.modalEl.querySelector('#edit-lecture-price').value || '',
+        cop: this.modalEl.querySelector('#edit-lecture-cop').value || '',
+        file: (this.fileInput && this.fileInput.files && this.fileInput.files[0]) || null
+      };
+    }
+  }
+
+  if (!window.AdminModal) {
+    window.AdminModal = new AdminModalComponent();
+  }
 
 })(window, document);
+// ...existing code...

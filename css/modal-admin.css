@@ -68,39 +68,39 @@ ease; }
  }
 
 .edit-modal .modal-form .board-search .cate { margin-left: 0; margin-bottom: 16px; } 
-.edit-modal .modal-content { background: white; border-radius: 16px; width: 90%; max-width: 450px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25); animation: slideIn 0.3s ease; overflow: hidden; } 
+.edit-modal .modal-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border-radius: 16px; width: 90%; max-width: 450px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25); 
+   overflow: hidden; } 
 
-@keyframes slideIn { 
- from { transform: translateY(-50px); opacity: 0; } 
- to { transform: translateY(0); opacity: 1; } 
- }
 
-.edit-modal .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem 1rem; border-bottom: 1px solid #e2e8f0; } 
+.edit-modal .modal-header {display: flex;justify-content: space-between;align-items: center;padding: 1rem 2rem;border-bottom: 1px solid #e2e8f0;} 
 .edit-modal .modal-header h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #1e293b; } 
 .edit-modal .modal-close { background: none; border: none; font-size: 1.5rem; color: #64748b; cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; } 
 .edit-modal .modal-close:hover { background: #f1f5f9; color: #475569; } 
-.edit-modal .modal-form { padding: 1.5rem 2rem 2rem; } 
-.edit-modal .form-group { display: flex; align-items: center; margin-bottom: 1rem; } 
+.edit-modal .modal-form { padding: 1rem 2rem; } 
+.edit-modal .form-group {display: flex;align-items: center;margin-bottom: 10px;} 
 .edit-modal .form-group.img-wrap { display: block; } 
 .edit-modal .form-group.img-wrap .img img { width: 100%; object-fit: cover; } 
 .edit-modal .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #000; font-size: 0.9rem; width: 17%; } 
 .edit-modal .form-group.radiobox-wrap label { display: inline-block; width: 100%; } 
-.edit-modal .modal-content .cate { margin-left: 0; margin-bottom: 16px; } 
+.edit-modal .modal-content .cate {margin-left: 0;margin-bottom: 10px;} 
 .edit-modal .form-input { width: 100%; padding: 0.15rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; font-weight: 500; background: #ffffff; transition: all 0.3s ease; box-sizing: border-box; } 
 .edit-modal .form-input:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); transform: translateY(-1px); } 
-.edit-modal .modal-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 2rem; } 
+.edit-modal .modal-actions {display: flex;gap: 0.75rem;justify-content: flex-end;margin-top: 20px;} 
 
- .edit-modal .files-upload-btns .btn-delete,
+ .edit-modal .btn-pack.btn-delete,
 .edit-modal .cancel-btn,
 .edit-modal .save-btn { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; } 
- .edit-modal .files-upload-btns .btn-delete { background: #555; color: #fff; } 
+ .edit-modal .btn-pack.btn-delete { width: 54px; background: #555; color: #fff; } 
 .edit-modal .cancel-btn { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; } 
 .edit-modal .cancel-btn:hover { background: #f1f5f9; color: #475569; transform: translateY(-1px); } 
 .edit-modal .save-btn { background: #6366f1; color: white; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3); } 
 .edit-modal .save-btn:hover { background: #5855eb; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); } 
- .edit-modal .img-wrap { margin-top: 15px; } 
- .edit-modal .files-upload-input { display: flex; flex-direction: column; gap: 8px; } 
- .edit-modal .files-upload-btns .btn-delete:hover { background: #333; } 
+ .edit-modal .form-group.img-wrap {/* margin-top: 15px; */margin-bottom: 15px;} 
+ .edit-modal .files-upload-input { display: block; position: relative; } 
+
+ /* .edit-modal .files-upload-input .form-input { margin-bottom: 16px; } */
+
+ .edit-modal .btn-pack.btn-delete:hover { background: #333; } 
  .edit-modal .files-upload-input .files-upload-btns { display: flex
 ; justify-content: end; } 
 .edit-modal .btn-pack.btn-delete,
@@ -109,3 +109,8 @@ ease; }
  height: 32px; line-height: 18px; padding: 0 15px; } 
 .edit-modal .modal-content .input { height: 40px; padding: 6px 10px; } 
  .edit-modal .modal-content .cate .input { width: 150px; } 
+
+ .edit-modal .preview-wrap {margin-bottom: 10px;} 
+ .edit-modal .preview-wrap img {display: block;margin-top: 10px;width: 100%;border-radius: 12px;object-fit: cover;} 
+
+ 

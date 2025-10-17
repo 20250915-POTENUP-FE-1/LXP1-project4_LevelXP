@@ -1,182 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="/css/board.css" />
-    <link rel="stylesheet" href="/css/lecture-board.css" />
-
-      <form method="post">
-        <div class="board-search">
-          <div class="total-page">전체 : 1 / 10</div>
-          <div class="cate">
-            <select name="" class="input" title="분류선택">
-              <option value="">전체</option>
-              <option value="">가격순</option>
-              <option value="">이름순</option>
-            </select>
-          </div>
-
-          <a href="#" class="btn-pack medium third btn-regist">강의등록</a>
-          <div id="modal-wrap"></div>
-    
-          <div class="search">
-            <input
-              type="search"
-              name="sk"
-              id="keyword"
-              class="input"
-              title="검색어"
-            />
-            <button type="submit" class="btn-pack medium dark">검색하기</button>
-          </div>
-        </div>
-      </form>
-
-      <div class="lecture-list">
-        <ul>
-          <li>
-            <div class="course-card edit">
-              <div class="thumb">
-                <img src="/assets/images/sub/lecture-01.png" alt="" />
-              </div>
-              <div class="meta">
-                <div class="btn-pack small cate bg-fe">프론트엔드-타입스크립트</div>
-                
-                <h3 class="course-title">
-                  
-                  한 입 크기로 잘라 먹는 리액트(React.js) : 기초부터 실전까지
-                </h3>
-                <p class="instructor">이정환</p>
-                <p class="price">₩48,400</p>
-                <div class="co-recomm">
-                  <div class="ico">
-                    <img src="/assets/images/sub/logo-wanted.png" alt="원티드" />
-                  </div>
-                  <span>원티드가 추천!</span>
-                </div>
-                <div class="buttons">
-                  <div class="fr">
-                    <a href="#" class="btn-pack small edit">수정</a>
-                    <a href="#" class="btn-pack small delete">삭제</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="course-card edit">
-              <div class="thumb">
-                <img src="/assets/images/sub/lecture-02.png" alt="" />
-              </div>
-              <div class="meta">
-                <div class="btn-pack small cate bg-be">백엔드-java</div>
-                <h3 class="course-title">
-                  한 입 크기로 잘라 먹는 리액트(React.js) : 기초부터 실전까지
-                </h3>
-                <p class="instructor">이정환</p>
-                <p class="price">₩48,400</p>
-                <div class="co-recomm">
-                  <div class="ico">
-                    <img src="/assets/images/sub/logo-wanted.png" alt="원티드" />
-                  </div>
-                  <span>원티드가 추천!</span>
-                </div>
-                <div class="buttons">
-                  <div class="fr">
-                    <a href="#" class="btn-pack small edit">수정</a>
-                    <a href="#" class="btn-pack small delete">삭제</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="paginate">
-        <a class="direction first" href="#"><span>처음페이지</span></a
-        ><a class="direction prev" href="#"><span>이전페이지</span></a
-        ><strong>1</strong><a href="#">2</a><a href="#">3</a><a href="#">4</a
-        ><a href="#">5</a
-        ><a class="direction next" href="#"><span>다음페이지</span></a
-        ><a class="direction last" href="#"><span>마지막페이지</span></a>
-      </div>
-
-
-    </div>
-  </div>
-</div>
-
-
-<div id="footer-wrap"></div>
-
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"
-></script>
-
-<script>
-  $(function () {
-    $("#header-wrap").load("/layouts/header.html");
-    $("#footer-wrap").load("/layouts/footer.html");
-
-    // 모달 스크립트 안전 로드 + init
-    (function loadAdminModal(){
-      var src = '/utils/admin-modal.js';
-      if (window.AdminModal) {
-        try { AdminModal.init({ container: '#modal-wrap' }); } catch(e) {}
-        return;
-      }
-      // 중복 로드 방지
-      if (document.querySelector('script[src="' + src + '"]')) return;
-      var script = document.createElement('script');
-      script.src = src;
-      script.onload = function () {
-        if (window.AdminModal) {
-          try { AdminModal.init({ container: '#modal-wrap' }); } catch(e) {}
-        }
-      };
-      document.body.appendChild(script);
-    })();
-
-    // 강의등록 버튼 클릭 -> 모달 열기 (로드/초기화가 늦어져도 재시도)
-    $(document).on('click', '.btn-regist', function (e) {
-      e.preventDefault();
-
-      function openWhenReady(attempts) {
-        attempts = attempts || 0;
-        if (window.AdminModal && typeof AdminModal.show === 'function') {
-          try {
-            // ensure init called once
-            if (typeof AdminModal.init === 'function') AdminModal.init({ container: '#modal-wrap' });
-            AdminModal.show();
-          } catch (err) {
-            console.error(err);
-          }
-          return;
-        }
-        if (attempts < 20) {
-          setTimeout(function(){ openWhenReady(attempts + 1); }, 100);
-        } else {
-          console.warn('AdminModal not available.');
-        }
-      }
-
-      // 시도 시작
-      openWhenReady(0);
-    });
-
-    // 모달 저장 이벤트 처리
-    document.addEventListener('adminModal:submit', function (ev) {
-      var formData = ev.detail || {};
-      console.log('adminModal submit detail:', formData);
-      // TODO: 실제 저장 처리(서버 전송 등)를 여기에 구현
-    }, false);
-  });
-</script> -->
-
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -184,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/board.css" />
     <link rel="stylesheet" href="/css/lecture-board.css" />
-
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
-    <script src="/utils/script.js"></script>
-    <script type="module" src="/components/modal/modal.js"></script>
     <script type="module" src="/layouts/header.js"></script>
     <script type="module" src="/layouts/footer.js"></script>
+    <script src="/utils/script.js"></script>
+    <script src="/utils/admin-modal.js"></script>
+    <script type="module" src="/utils/modal-opener.js"></script>
+    <script type="module" src="/components/modal/modal.js"></script>
     <script type="module" src="/layouts/lecture-board.js"></script>
     <script type="module" src="/components/lecture/lecture.js"></script>
   </head>
@@ -201,38 +23,47 @@
     <div id="header-wrap"><header-component /></div>
     <div class="sub-visual">
       <div class="contain">
-        <div class="tt-wrap be">
-          <div class="tit">Java</div>
+        <div class="tt-wrap admin">
+          <div class="tit">관리자 페이지</div>
         </div>
       </div>
     </div>
     <div id="container">
       <div id="contArea">
         <div class="sub-title blind">
-          <h2>Java</h2>
+          <h2>관리자 페이지</h2>
         </div>
         <div class="real-cont">
           <lecture-board id="lecture-list" isAdmin="true">
             <ul>
               <li>
+                <lecture-item
+                  title="gd"
+                  isAdmin="true"
+                  recommandedCompany="asdf"
+                />
+              </li>
+              <li>
                 <lecture-item title="gd" isAdmin="true" />
               </li>
               <li>
-                <lecture-item title="gd" />
+                <lecture-item title="gd" isAdmin="true" />
               </li>
               <li>
-                <lecture-item title="gd" />
+                <lecture-item title="gd" isAdmin="true" />
               </li>
             </ul>
           </lecture-board>
-          <modal-component title="asdfsdafadsfas">
+          <!-- <modal-component title="asdfsdafadsfas">
             <p><strong>HTML 요소</strong>를 넣을 수 있습니다.</p>
-          </modal-component>
+          </modal-component> -->
         </div>
       </div>
     </div>
 
     <div id="footer-wrap"><footer-component /></div>
+
+    <!-- modal container (라이트 DOM에 반드시 존재해야 AdminModal.init이 정상작동합니다) -->
     <div id="modal-wrap"></div>
   </body>
 </html>
