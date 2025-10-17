@@ -1,3 +1,5 @@
+import { LectureBoardHandler } from "./lectureBoardHandler.js";
+
 export function bindAdminModal(
   shadowRoot,
   { title, instructor, price, recommandedCompany, dataIndex }
@@ -31,8 +33,23 @@ export function bindAdminModal(
     deleteBtn.addEventListener("click", (e) => {
       e.stopPropagation();
 
-      if (confirm("정말 삭제하시겠습니까?")) window.deleteLecture(dataIndex);
-      //  shadowRoot.host.remove();
+      if (confirm("정말 삭제하시겠습니까?")) {
+        const lectureBoard = document.querySelector("lecture-board");
+
+        console.log(lectureBoard);
+
+        window.deleteLecture(dataIndex);
+
+        if (lectureBoard) {
+          const isAdmin = lectureBoard.getAttribute("isAdmin") === "true";
+          const lectureBoardHandler = new LectureBoardHandler(
+            lectureBoard,
+            isAdmin
+          );
+
+          lectureBoardHandler.showAllLectureList();
+        }
+      }
     });
   }
 }

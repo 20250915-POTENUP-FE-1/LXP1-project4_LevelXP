@@ -1,5 +1,5 @@
 import { bindUserModal } from "/components/modal/lecture-buy-handler.js";
-import { bindAdminModal } from "/components/modal/lecture-admin-handler.js";
+import { bindAdminModal } from "/utils/handler/lectureHandler.js";
 
 class LectureComponent extends HTMLElement {
   connectedCallback() {
