@@ -68,7 +68,7 @@ class LectureBoard extends HTMLElement {
         if (card) {
           // data-index 우선
           if (card.dataset && card.dataset.index) data.index = card.dataset.index;
-          // DOM에서 정보 추출(필요시 localStorage로 대체하는 로직은 modal-opener/admin script에서 처리)
+          // DOM에서 정보 추출(필요시 localStorage로 대체하는 로직은 admin-opener/admin script에서 처리)
           const titleEl = card.querySelector('.course-title');
           const instEl = card.querySelector('.instructor');
           const priceEl = card.querySelector('.price');
