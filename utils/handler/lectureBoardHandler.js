@@ -74,7 +74,9 @@ export class LectureBoardHandler {
       this.isAdmin
     ).join("");
 
-    lectureListContainer.innerHTML = lectureElementList;
+    lectureListContainer.innerHTML = lectureElementList
+      ? lectureElementList
+      : `<li class="no-data">등록된 강의가 없습니다.</li>`;
   }
 
   showKeywordLectureList(keyword) {
