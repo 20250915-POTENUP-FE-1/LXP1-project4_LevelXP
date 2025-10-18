@@ -4,57 +4,50 @@
   class AdminModalComponent {
     constructor() {
       this.TEMPLATE = `
-<link rel="stylesheet" href="/css/modal-admin.css">
-<div id="lectureFormModal" class="edit-modal" style="display:none;">
-  <div class="modal-content">
-    <div class="modal-header"><h3>강의 등록</h3><button class="modal-close" data-role="close">&times;</button></div>
-    <form id="lectureForm" class="modal-form">
-      <input type="hidden" id="edit-lecture-index">
-      <div class="cate">
-        <select id="edit-lecture-category" class="input" title="분류선택">
-          <option value="">분류선택</option>
-          <option value="FE">FE</option>
-          <option value="BE">BE</option>
-        </select>
-      </div>
-      <div class="cate">
-        <select id="edit-lecture-categoryDetail" class="input" title="분류선택">
-          <option value="">분류선택</option>
-          <option value="JavaScript">JavaScript</option>
-          <option value="TypeScript">TypeScript</option>
-        </select>
-      </div>
-      <div class="form-group img-wrap">
-        <label for="upfile">첨부파일</label>
-        <div class="files-upload-input">
-          <input type="file" id="upfile" accept="image/*" class="form-input" />
-          <div class="preview-wrap" id="preview-wrap"></div>
-          <button type="button" class="btn-pack btn-delete" data-role="remove-file">삭제</button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="edit-lecture-title">강의명</label>
-        <input type="text" id="edit-lecture-title" class="form-input" required>
-      </div>
-      <div class="form-group">
-        <label for="edit-lecture-instructor">강사명</label>
-        <input type="text" id="edit-lecture-instructor" class="form-input" required>
-      </div>
-      <div class="form-group">
-        <label for="edit-lecture-price">가격</label>
-        <input type="text" id="edit-lecture-price" class="form-input" required>
-      </div>
-      <div class="form-group">
-        <label for="edit-lecture-recommandedCompany">회사명</label>
-        <input type="text" id="edit-lecture-recommandedCompany" class="form-input">
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="cancel-btn" data-role="close">취소</button>
-        <button type="submit" class="save-btn">저장</button>
-      </div>
-    </form>
-  </div>
-</div>`.trim();
+        <link rel="stylesheet" href="/css/modal-admin.css">
+        <div id="lectureFormModal" class="edit-modal" style="display:none;">
+          <div class="modal-content">
+            <div class="modal-header"><h3>강의 등록</h3><button class="modal-close" data-role="close">&times;</button></div>
+            <form id="lectureForm" class="modal-form">
+              <input type="hidden" id="edit-lecture-index">
+              <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                <div class="cate">
+                  <select id="edit-lecture-category" class="input" title="분류선택">
+                    <option value="">카테고리 선택</option>
+                    <option value="FE">FE</option>
+                    <option value="BE">BE</option>
+                  </select>
+                </div>
+                <div class="cate">
+                  <select id="edit-lecture-categoryDetail" class="input" title="분류선택">
+                    <option value="">세부 선택</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label for="edit-lecture-title">강의명</label>
+                <input type="text" id="edit-lecture-title" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="edit-lecture-instructor">강사명</label>
+                <input type="text" id="edit-lecture-instructor" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="edit-lecture-price">가격</label>
+                <input type="text" id="edit-lecture-price" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="edit-lecture-recommandedCompany">회사명</label>
+                <input type="text" id="edit-lecture-recommandedCompany" class="form-input">
+              </div>
+              <div class="modal-actions">
+                <button type="button" class="cancel-btn" data-role="close">취소</button>
+                <button type="submit" class="save-btn">저장</button>
+              </div>
+            </form>
+          </div>
+        </div>`.trim();
 
       this.container = null;
       this.modalEl = null;
@@ -219,6 +212,16 @@
         });
       }
 
+      const categorySelect = this.modalEl.querySelector(
+        "#edit-lecture-category"
+      );
+      if (categorySelect) {
+        categorySelect.addEventListener("change", (e) => {
+          const selectedCategory = e.target.value;
+          this._updateCategoryDetailOptions(selectedCategory);
+        });
+      }
+
       this._bound = true;
     }
 
@@ -243,9 +246,11 @@
       try {
         if (data.index !== undefined)
           this.modalEl.querySelector("#edit-lecture-index").value = data.index;
-        if (data.category !== undefined)
+        if (data.category !== undefined) {
           this.modalEl.querySelector("#edit-lecture-category").value =
             data.category;
+          this._updateCategoryDetailOptions(data.category);
+        }
         if (data.categoryDetail !== undefined)
           this.modalEl.querySelector("#edit-lecture-categoryDetail").value =
             data.categoryDetail;
@@ -297,6 +302,32 @@
           (this.fileInput && this.fileInput.files && this.fileInput.files[0]) ||
           null,
       };
+    }
+
+    _updateCategoryDetailOptions(selectedCategory) {
+      const categoryDetailSelect = this.modalEl.querySelector(
+        "#edit-lecture-categoryDetail"
+      );
+      if (!categoryDetailSelect) return;
+
+      let options = '<option value="">세부 선택</option>';
+      if (selectedCategory === "FE") {
+        options = window.APP_CATEGORY.filter(
+          (category) => category.title === "FE"
+        )[0].details.map((detail) => {
+          return `<option value="${detail}">${detail}</option>`;
+        });
+        //   options += `
+        // <option value="JavaScript">JavaScript</option>
+        // <option value="TypeScript">TypeScript</option>
+      } else if (selectedCategory === "BE") {
+        options = window.APP_CATEGORY.filter(
+          (category) => category.title === "BE"
+        )[0].details.map((detail) => {
+          return `<option value="${detail}">${detail}</option>`;
+        });
+      }
+      categoryDetailSelect.innerHTML = options;
     }
   }
 

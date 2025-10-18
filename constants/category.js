@@ -8,4 +8,6 @@ const APP_CATEGORY = [
   { title: "My", details: ["MyPage"] },
 ];
 
+window.APP_CATEGORY = APP_CATEGORY;
+
 export { APP_CATEGORY };
