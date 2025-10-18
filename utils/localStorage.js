@@ -123,8 +123,32 @@ function initializeLectureData() {
  *
  * @returns {Array} 로컬스토리지에 저장된 강의목록 배열
  */
-function getLectureList() {
-  return JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY)) ?? [];
+function getLectureList(category = "", categoryDetail = "") {
+  if (category === "ADMIN") {
+    return JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY)) ?? [];
+  }
+
+  if (category && !categoryDetail) {
+    return (
+      JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY))?.filter(
+        (lecture) => lecture.category === category
+      ) ?? []
+    );
+  } else if (category && categoryDetail) {
+    return (
+      JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY))?.filter(
+        (lecture) =>
+          lecture.category === category &&
+          lecture.categoryDetail === categoryDetail
+      ) ?? []
+    );
+  } else {
+    return JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY)) ?? [];
+  }
+}
+
+function getLectureListLength() {
+  return (JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY)) ?? []).length;
 }
 
 function saveLecture(lecture) {
@@ -183,6 +207,7 @@ window.saveLecture = saveLecture;
 window.deleteLecture = deleteLecture;
 window.updateLecture = updateLecture;
 window.searchLectures = searchLectures;
+window.getLectureListLength = getLectureListLength;
 
 export {
   getLecture,

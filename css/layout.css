@@ -410,10 +410,14 @@
   margin: 40px 0;
 }
 .sub-visual .tt-wrap.be {
-     background: var(--color-secondary);
+  background: var(--color-secondary);
 }
 .sub-visual .tt-wrap.admin {
-     background: var(--color-third);
+  background: var(--color-third);
+}
+
+.sub-visual .tt-wrap.my {
+  background: var(--color-fourth);
 }
 
 .sub-visual .tt-wrap .tit {

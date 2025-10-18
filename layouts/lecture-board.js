@@ -1,11 +1,17 @@
 import { getLectureElementList } from "../utils/lecture.js";
 import { getLectureList, initializeLectureData } from "/utils/localStorage.js";
 import { LectureBoardHandler } from "/utils/handler/lectureBoardHandler.js";
+import { APP_CATEGORY } from "/constants/category.js";
 
 // lecture-board.js — connectedCallback 교체 (shadow 내부 클릭을 받아 composed event로 라이트로 전달, 수정 버튼은 composedPath로 소속 카드 찾음)
 class LectureBoard extends HTMLElement {
   connectedCallback() {
-    const isAdmin = this.getAttribute("isAdmin") === "true";
+    const params = new URLSearchParams(window.location.search);
+
+    const category = params.get("category");
+    const categoryDetail = params.get("categoryDetail");
+
+    const isAdmin = category === "ADMIN";
 
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = `
@@ -14,7 +20,7 @@ class LectureBoard extends HTMLElement {
       <link rel="stylesheet" href="/css/board.css" />
       <link rel="stylesheet" href="/css/reset.css" />
       <div class="board-search">
-        <div class="total-page">전체 : 1 / 10</div>
+        <div class="total-page"></div>
 					<div class="cate">
 						<select name="" class="input" title="분류선택">
 							<option value="">전체</option>
@@ -34,20 +40,27 @@ class LectureBoard extends HTMLElement {
       	</div>
 
 				<div id="lecture-list">
-        <ul></ul>
+          <ul></ul>
 				</div>
-				<div class="paginate">
-					<a class="direction first" href="#"><span>처음페이지</span></a
-					><a class="direction prev" href="#"><span>이전페이지</span></a
-					><strong>1</strong><a href="#">2</a><a href="#">3</a><a href="#">4</a
-					><a href="#">5</a
-					><a class="direction next" href="#"><span>다음페이지</span></a
-					><a class="direction last" href="#"><span>마지막페이지</span></a>
-				</div>
+
 			</body>
     `;
+    // FIXME: pagenation
+    // 		<div class="paginate">
+    // 	<a class="direction first" href="#"><span>처음페이지</span></a
+    // 	><a class="direction prev" href="#"><span>이전페이지</span></a
+    // 	><strong>1</strong><a href="#">2</a><a href="#">3</a><a href="#">4</a
+    // 	><a href="#">5</a
+    // 	><a class="direction next" href="#"><span>다음페이지</span></a
+    // 	><a class="direction last" href="#"><span>마지막페이지</span></a>
+    // </div>
 
-    this.handler = new LectureBoardHandler(this, isAdmin);
+    this.handler = new LectureBoardHandler(
+      this,
+      isAdmin,
+      category,
+      categoryDetail
+    );
   }
 }
 

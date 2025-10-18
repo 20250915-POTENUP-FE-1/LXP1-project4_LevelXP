@@ -11,15 +11,14 @@
   box-sizing: border-box;
 }
 
-
 :root {
   /* color */
   --color-primary: #0078ff;
-  --color-secondary: #6366f1;
+  --color-secondary: #f16399;
   --color-third: #21b5ff;
+  --color-fourth: #32d55a;
   --color-dark: #242424;
   /* --color-gradient:  linear-gradient(90deg, rgba(98,64,153,1) 0%, rgba(190,66,152,1) 100%); */
-
 
   /* height  */
   --header-height: clamp(3.75rem, 2.5rem + 3.125vw, 6.25rem);

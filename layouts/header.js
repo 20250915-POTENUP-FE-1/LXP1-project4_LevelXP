@@ -8,6 +8,8 @@
 //   });
 // }
 
+import { APP_CATEGORY } from "../constants/category.js";
+
 // async function loadLibraries() {
 //   try {
 //     // 순서대로 로드 (jQuery 의존성 고려)
@@ -41,6 +43,25 @@
 
 class HeaderComponent extends HTMLElement {
   connectedCallback() {
+    const routes = APP_CATEGORY.map((route) => {
+      return `
+        <li>
+          <a href="/pages/detail.html?category=${route.title}">${
+        route.title
+      }</a>
+          <div class="submenu">
+            <ul>
+              ${route.details
+                .map((detail) => {
+                  return `<li><a href="/pages/detail.html?category=${route.title}&categoryDetail=${detail}">${detail}</a></li>`;
+                })
+                .join("")}
+            </ul>
+          </div>
+        </li>
+      `;
+    }).join("");
+
     this.innerHTML = `
       <head>
         <meta charset="utf-8" />
@@ -87,27 +108,7 @@ class HeaderComponent extends HTMLElement {
               </h1>
               <div id="gnb" class="gnb">
                 <ul>
-                  <li>
-                    <a href="/pages/fe/typescript.html">Frontend</a>
-                    <div class="submenu">
-                      <ul>
-                        <li><a href="/pages/fe/typescript.html">TypeScript</a></li>
-                        <li><a href="/pages/fe/react.html">React</a></li>
-                        <li><a href="/pages/fe/next-js.html">Next.js</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li>
-                    <a href="/pages/be/python.html">Backend</a>
-                    <div class="submenu">
-                      <ul>
-                        <li><a href="/pages/be/python.html">Python</a></li>
-                        <li><a href="/pages/be/java.html">Java</a></li>
-                        <li><a href="/pages/be/php.html">PHP</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li><a href="/pages/admin/admin.html">관리자 페이지</a></li>
+                  ${routes}
                 </ul>
               </div>
               <div class="utility">

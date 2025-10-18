@@ -11,14 +11,14 @@
     <form id="lectureForm" class="modal-form">
       <input type="hidden" id="edit-lecture-index">
       <div class="cate">
-        <select id="edit-lecture-categoryTitle" class="input" title="분류선택">
+        <select id="edit-lecture-category" class="input" title="분류선택">
           <option value="">분류선택</option>
           <option value="FE">FE</option>
           <option value="BE">BE</option>
         </select>
       </div>
       <div class="cate">
-        <select id="edit-lecture-categorySubTitle" class="input" title="분류선택">
+        <select id="edit-lecture-categoryDetail" class="input" title="분류선택">
           <option value="">분류선택</option>
           <option value="JavaScript">JavaScript</option>
           <option value="TypeScript">TypeScript</option>
@@ -243,12 +243,12 @@
       try {
         if (data.index !== undefined)
           this.modalEl.querySelector("#edit-lecture-index").value = data.index;
-        if (data.categoryTitle !== undefined)
-          this.modalEl.querySelector("#edit-lecture-categoryTitle").value =
-            data.categoryTitle;
-        if (data.categorySubTitle !== undefined)
-          this.modalEl.querySelector("#edit-lecture-categorySubTitle").value =
-            data.categorySubTitle;
+        if (data.category !== undefined)
+          this.modalEl.querySelector("#edit-lecture-category").value =
+            data.category;
+        if (data.categoryDetail !== undefined)
+          this.modalEl.querySelector("#edit-lecture-categoryDetail").value =
+            data.categoryDetail;
         if (data.title !== undefined)
           this.modalEl.querySelector("#edit-lecture-title").value = data.title;
         if (data.instructor !== undefined)
@@ -281,10 +281,10 @@
       if (!this.modalEl) return null;
       return {
         index: this.modalEl.querySelector("#edit-lecture-index").value || "",
-        categoryTitle:
-          this.modalEl.querySelector("#edit-lecture-categoryTitle").value || "",
-        categorySubTitle:
-          this.modalEl.querySelector("#edit-lecture-categorySubTitle").value ||
+        category:
+          this.modalEl.querySelector("#edit-lecture-category").value || "",
+        categoryDetail:
+          this.modalEl.querySelector("#edit-lecture-categoryDetail").value ||
           "",
         title: this.modalEl.querySelector("#edit-lecture-title").value || "",
         instructor:

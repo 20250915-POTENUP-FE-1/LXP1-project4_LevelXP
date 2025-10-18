@@ -5,54 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/board.css" />
     <link rel="stylesheet" href="/css/lecture-board.css" />
-
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
-    <script src="/utils/script.js"></script>
-    <script type="module" src="/components/modal/modal.js"></script>
     <script type="module" src="/layouts/header.js"></script>
     <script type="module" src="/layouts/footer.js"></script>
+    <script src="/utils/script.js"></script>
+    <script src="/components/modal/admin-modal.js"></script>
+    <script type="module" src="/components/modal/admin-opener.js"></script>
     <script type="module" src="/layouts/lecture-board.js"></script>
     <script type="module" src="/components/lecture/lecture.js"></script>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+
+      const category = params.get("category");
+      const categoryDetail = params.get("categoryDetail");
+
+      // Title Display change
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector(".tt-wrap .tit").textContent = `${category} ${
+          categoryDetail ? `- ${categoryDetail}` : ""
+        }`;
+
+        // Title background color change
+        document
+          .querySelector(".tt-wrap")
+          .classList.add(category.toLowerCase());
+      });
+    </script>
   </head>
   <body>
     <div id="header-wrap"><header-component /></div>
     <div class="sub-visual">
       <div class="contain">
-        <div class="tt-wrap be">
-          <div class="tit">Java</div>
+        <div class="tt-wrap">
+          <div class="tit"></div>
         </div>
       </div>
     </div>
     <div id="container">
       <div id="contArea">
-        <div class="sub-title blind">
-          <h2>Java</h2>
-        </div>
         <div class="real-cont">
-          <lecture-board id="lecture-list">
-            <ul>
-              <li>
-                <lecture-item title="gd" />
-              </li>
-              <li>
-                <lecture-item title="gd" />
-              </li>
-              <li>
-                <lecture-item title="gd" />
-              </li>
-            </ul>
-          </lecture-board>
+          <lecture-board id="lecture-list"></lecture-board>
         </div>
       </div>
-      <modal-component title="asdfsdafadsfas">
-        <div slot="body">
-          <p><strong>HTML 요소</strong>를 넣을 수 있습니다.</p>
-        </div>
-      </modal-component>
     </div>
 
     <div id="footer-wrap"><footer-component /></div>

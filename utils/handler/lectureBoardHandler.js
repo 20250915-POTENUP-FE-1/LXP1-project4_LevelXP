@@ -2,12 +2,19 @@ import { getLectureList } from "../localStorage.js";
 import { getLectureElementList } from "../lecture.js";
 
 export class LectureBoardHandler {
-  constructor(lectureBoardElement, isAdmin = false) {
+  constructor(
+    lectureBoardElement,
+    isAdmin = false,
+    category = "",
+    categoryDetail = ""
+  ) {
     this.element = lectureBoardElement;
     this.isAdmin = isAdmin;
+    this.category = category;
+    this.categoryDetail = categoryDetail;
 
     this.searchLecture();
-    this.showAllLectureList();
+    this.showAllLectureList(category, categoryDetail);
     this.showLectureBoardModal();
   }
 
@@ -59,11 +66,11 @@ export class LectureBoardHandler {
     });
   }
 
-  showAllLectureList() {
+  showAllLectureList(category = "", categoryDetail = "") {
     const lectureListContainer =
       this.element.shadowRoot.querySelector("#lecture-list ul");
     const lectureElementList = getLectureElementList(
-      getLectureList(),
+      getLectureList(category, categoryDetail),
       this.isAdmin
     ).join("");
 
