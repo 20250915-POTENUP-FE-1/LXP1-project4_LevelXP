@@ -52,7 +52,7 @@ class LectureComponent extends HTMLElement {
 
     const card = this.shadowRoot.querySelector(".course-card");
 
-    if (!isAdmin) bindUserModal(card, { title, detail, price });
+    if (!isAdmin) bindUserModal(card, { title, detail, price, instructor });
     if (isAdmin)
       bindAdminModal(this.shadowRoot, {
         title,

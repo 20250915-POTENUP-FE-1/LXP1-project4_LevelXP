@@ -112,6 +112,7 @@ const LECTURE_DATA = [
 ];
 
 const LECTURE_STORAGE_KEY = "levelxp_lectures";
+const LECTURE_MY_STORAGE_KEY = "levelxp_my_lectures";
 
 function initializeLectureData() {
   // 배열로 되어있는 강의목록(data)를 로컬스토리지에 저장을 하기
@@ -126,6 +127,10 @@ function initializeLectureData() {
 function getLectureList(category = "", categoryDetail = "") {
   if (category === "ADMIN") {
     return JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY)) ?? [];
+  }
+
+  if (category === "My") {
+    return JSON.parse(localStorage.getItem(LECTURE_MY_STORAGE_KEY)) ?? [];
   }
 
   if (category && !categoryDetail) {
@@ -151,8 +156,15 @@ function getLectureListLength() {
   return (JSON.parse(localStorage.getItem(LECTURE_STORAGE_KEY)) ?? []).length;
 }
 
-function saveLecture(lecture) {
-  localStorage.setItem(
+function saveLecture(lecture, isBuy = false) {
+  if (isBuy) {
+    return localStorage.setItem(
+      LECTURE_MY_STORAGE_KEY,
+      JSON.stringify([lecture, ...getLectureList("My")])
+    );
+  }
+
+  return localStorage.setItem(
     LECTURE_STORAGE_KEY,
     JSON.stringify([lecture, ...getLectureList()])
   );

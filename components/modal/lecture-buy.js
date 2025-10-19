@@ -12,6 +12,7 @@ class LectureDetail extends HTMLElement {
       this.getAttribute("detail") ||
       "전통적인 React 개발 방식과 Next.js를 이용해서 개발하는 방식은 전혀 다릅니다. 이 강의는 최신 Next.js 15의 핵심을 꿰뚫고, '진짜' Next.js다운 개발 방식을 알려드립니다. 취업 포트폴리오부터 실무 프로젝트까지, 성능과 효율을 모두 잡는 방법을 경험하세요.";
     const price = this.getAttribute("price") || "1,000,000,000";
+    const instructor = this.getAttribute("instructor");
 
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="/css/lectrue-buy.css" />
@@ -19,6 +20,7 @@ class LectureDetail extends HTMLElement {
         <div class="lectrue-buy">
           <h1 class="title">${title}</h1>
           <p class="detail">${detail}</p>
+          <p class="instructor">강사: ${instructor}</p>
           <p class="price">${price}원</p>
           <div class="btn-group">
             <button class="btn-confirm" type="button">확인</button>
@@ -40,7 +42,23 @@ class LectureDetail extends HTMLElement {
       .querySelector(".btn-confirm")
       .addEventListener("click", () => {
         // FIXME: buy 모달 이벤트 부분
+        const lectureData = {
+          title:
+            this.getAttribute("title") || "Next.js 15: Full-Stack Development",
+          detail: this.getAttribute("detail") || "강의 상세 내용",
+          price: this.getAttribute("price") || "1,000,000,000",
+          instructor: this.getAttribute("instructor"),
+        };
         alert("구매가 완료되었습니다");
+        // lecture my storage에 저장
+        window.saveLecture(
+          {
+            ...lectureData,
+            price: parseInt(lectureData.price.replace("₩", "")),
+          },
+          true
+        );
+
         this.remove();
       });
 
