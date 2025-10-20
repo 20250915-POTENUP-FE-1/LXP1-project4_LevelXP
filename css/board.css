@@ -96,6 +96,8 @@
 .btn-pack.xlarge { min-width: 180px; height: 60px; padding: 0 40px; line-height: 58px; font-size: 20px; font-weight: 500; } 
 .btn-pack.comment { width: 120px; height: 90px; padding: 0; font-size: 20px; font-weight: 500; background: #fff; color: var(--color-primary); border: 1px solid var(--color-primary); } 
 
+.btn-pack.btn-regist { margin-left: 16px; border-radius: 10px; } 
+
 .btn-map { display: inline-block; padding: 0 15px; color: #505050; font-size: 14px; font-weight: 400; line-height: 32px; letter-spacing: -0.03em; border-radius: 30px; background: #fff; border: 1px solid #505050; text-align: center; text-decoration: none !important; } 
 .btn-map:hover { color: #fff; background: #333; border-color: #333; } 
 
